@@ -31,6 +31,10 @@ public class SdkConfigData
 
     public static SdkConfigData ReadForFile()
     {
+        if (!File.Exists(configPath))
+        {
+            return new SdkConfigData();
+        }
         var json = File.ReadAllText(configPath);
         if (json == null || json.Length == 0)
         {
