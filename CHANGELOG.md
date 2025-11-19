@@ -1,6 +1,13 @@
 Athana Unity Plugin Change Log
 
 **************
+Version 1.3.2
+**************
+
+- AdService Config add AD preload
+
+
+**************
 Version 1.3.1
 **************
 

@@ -471,7 +471,8 @@ namespace Athana.Api
             public string? privacyPolicyUrl;
             public string? termsOfServiceUrl;
             public bool debug = false;
-            public bool preload = true;
+            public string? preloadAds;
+            public bool autoLoadNext = true;
         }
 
         [Serializable]
