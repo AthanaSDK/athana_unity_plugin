@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Athana.Api;
+using System;
 
 #nullable enable
 public class AthanaUnityEditor : AthanaInterface
@@ -191,5 +192,10 @@ public class AthanaUnityEditor : AthanaInterface
     {
 
         AthanaLogger.D("Calling SendEvent on Unity Editor");
+    }
+
+    public static void UpdateUserInfo(long customUserId, Dictionary<string, object>? extra = null)
+    {
+        AthanaLogger.D($"Calling UpdateUserInfo on Unity Editor");
     }
 }

@@ -1,6 +1,13 @@
 Athana Unity Plugin Change Log
 
 **************
+Version 1.3.3
+**************
+
+- Add UpdateUserinfo Func
+
+
+**************
 Version 1.3.2
 **************
 

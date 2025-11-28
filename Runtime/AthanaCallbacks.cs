@@ -179,6 +179,19 @@ namespace Athana.Callbacks
             }
         }
 
+        private static Action<SdkCallback<object?>> onUpdateUserInfoResult;
+        public static event Action<SdkCallback<object?>> OnUpdateUserInfoResult
+        {
+            add
+            {
+                onUpdateUserInfoResult += value;
+            }
+            remove
+            {
+                onUpdateUserInfoResult -= value;
+            }
+        }
+
         [Serializable]
         private class SdkResult
         {
@@ -272,6 +285,10 @@ namespace Athana.Callbacks
             else if (funcName == "onRequestReviewResult")
             {
                 invokeNoResultObj(errorJson, funcName, onRequestReviewResult);
+            }
+            else if (funcName == "onUpdateUserInfoResult")
+            {
+                invokeNoResultObj(errorJson, funcName, onUpdateUserInfoResult);
             }
             else
             {

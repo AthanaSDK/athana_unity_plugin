@@ -432,6 +432,13 @@ public class AthanaAndroid : AthanaInterface
         AthanaUnityPluginClass.CallStatic("sendEvent", key, type, paramsJavaObj);
     }
 
+    public static void UpdateUserInfo(long customUserId, Dictionary<string, object>? extra = null)
+    {
+        AthanaLogger.D($"Calling UpdateUserInfo");
+        var paramsJavaObj = extra == null ? null : toJavaMap(extra);
+        AthanaUnityPluginClass.CallStatic("updateUserInfo", customUserId, paramsJavaObj);
+    }
+
     private static AndroidJavaObject? toJavaMap(Dictionary<string, object> extra)
     {
 
