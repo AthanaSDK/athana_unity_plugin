@@ -28,7 +28,7 @@ public class SdkConfigData
     public string FacebookAppId = "";
     public string FacebookClientToken = "";
 
-    public string AndroidDepsVersion = "1.3.2";
+    public string AndroidDepsVersion = "1.3.4";
 
     public static SdkConfigData ReadForFile()
     {
