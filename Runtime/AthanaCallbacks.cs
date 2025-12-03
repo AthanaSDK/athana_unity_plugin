@@ -9,8 +9,10 @@ namespace Athana.Callbacks
     public static class AthanaCallbacks
     {
 
-        // 账户回调
         private static Action<SdkCallback<AthanaInterface.AccountInfo?>> onCurrentUserResult;
+        /// <summary>
+        /// 获取当前登入账户信息的回调监听
+        /// </summary>
         public static event Action<SdkCallback<AthanaInterface.AccountInfo?>> OnCurrentUserResult
         {
             add
@@ -24,6 +26,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<AthanaInterface.AccountInfo>> onRegistryUserResult;
+        /// <summary>
+        /// 注册平台用户的回调监听
+        /// </summary>
         public static event Action<SdkCallback<AthanaInterface.AccountInfo>> OnRegistryUserResult
         {
             add
@@ -37,6 +42,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<AthanaInterface.AccountInfo>> onSignInResult;
+        /// <summary>
+        /// 登入的回调监听
+        /// </summary>
         public static event Action<SdkCallback<AthanaInterface.AccountInfo>> OnSignInResult
         {
             add
@@ -50,6 +58,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<AthanaInterface.AccountInfo>> onSignInWithUIResult;
+        /// <summary>
+        /// 使用内置UI登入的回调监听
+        /// </summary>
         public static event Action<SdkCallback<AthanaInterface.AccountInfo>> OnSignInWithUIResult
         {
             add
@@ -63,6 +74,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<object?>> onSignOutResult;
+        /// <summary>
+        /// 登出的回调监听
+        /// </summary>
         public static event Action<SdkCallback<object?>> OnSignOutResult
         {
             add
@@ -76,6 +90,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<object?>> onAccountBindingResult;
+        /// <summary>
+        /// 绑定三方账号的回调监听
+        /// </summary>
         public static event Action<SdkCallback<object?>> OnAccountBindingResult
         {
             add
@@ -89,6 +106,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<object?>> onAccountUnbindResult;
+        /// <summary>
+        /// 解绑三方账号的回调监听
+        /// </summary>
         public static event Action<SdkCallback<object?>> OnAccountUnbindResult
         {
             add
@@ -102,6 +122,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<AthanaInterface.TriAccountBindMap>> onQueryAllAccountBindResult;
+        /// <summary>
+        /// 查询三方账号绑定信息的回调监听
+        /// </summary>
         public static event Action<SdkCallback<AthanaInterface.TriAccountBindMap>> OnQueryAllAccountBindResult
         {
             add
@@ -115,6 +138,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<List<AthanaInterface.IapProduct>>> onQueryProductsResult;
+        /// <summary>
+        /// 查询商品信息的回调监听
+        /// </summary>
         public static event Action<SdkCallback<List<AthanaInterface.IapProduct>>> OnQueryProductsResult
         {
             add
@@ -128,6 +154,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<object?>> onPurchaseResult;
+        /// <summary>
+        /// 购买的回调监听
+        /// </summary>
         public static event Action<SdkCallback<object?>> OnPurchaseResult
         {
             add
@@ -141,6 +170,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<List<AthanaInterface.IapPurchase>>> onQueryPurchaseHistoryResult;
+        /// <summary>
+        /// 查询购买历史记录的回调监听
+        /// </summary>
         public static event Action<SdkCallback<List<AthanaInterface.IapPurchase>>> OnQueryPurchaseHistoryResult
         {
             add
@@ -154,6 +186,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<object?>> onVerifyOrderResult;
+        /// <summary>
+        /// 验证订单的回调监听
+        /// </summary>
         public static event Action<SdkCallback<object?>> OnVerifyOrderResult
         {
             add
@@ -167,6 +202,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<object?>> onRequestReviewResult;
+        /// <summary>
+        /// 应用内评价调用结果的回调监听
+        /// </summary>
         public static event Action<SdkCallback<object?>> OnRequestReviewResult
         {
             add
@@ -180,6 +218,9 @@ namespace Athana.Callbacks
         }
 
         private static Action<SdkCallback<object?>> onUpdateUserInfoResult;
+        /// <summary>
+        /// 补充用户信息调用结果的回调监听
+        /// </summary>
         public static event Action<SdkCallback<object?>> OnUpdateUserInfoResult
         {
             add

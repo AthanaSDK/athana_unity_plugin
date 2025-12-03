@@ -34,24 +34,24 @@ class SdkConfigEditorWindow : EditorWindow
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.ExpandHeight(true));
 
         // ----------------- Deps Version -----------------
-        GUILayout.Label("°æ±¾ÅäÖÃ", EditorStyles.boldLabel);
+        GUILayout.Label("ç‰ˆæœ¬é…ç½®", EditorStyles.boldLabel);
         GUILayout.Space(10);
-        SdkConfig.AndroidDepsVersion = EditorGUILayout.TextField("Android SDK°æ±¾", SdkConfig.AndroidDepsVersion);
+        SdkConfig.AndroidDepsVersion = EditorGUILayout.TextField("Android SDKç‰ˆæœ¬", SdkConfig.AndroidDepsVersion);
         GUILayout.Space(25);
 
         // ----------------- AD -----------------
-        GUILayout.Label("¹ã¸æ·şÎñÅäÖÃ", EditorStyles.boldLabel);
+        GUILayout.Label("å¹¿å‘ŠæœåŠ¡é…ç½®", EditorStyles.boldLabel);
         GUILayout.Space(10);
-        SdkConfig.AdServiceEnabled = EditorGUILayout.BeginToggleGroup("¼¯³É¹ã¸æ", SdkConfig.AdServiceEnabled);
+        SdkConfig.AdServiceEnabled = EditorGUILayout.BeginToggleGroup("é›†æˆå¹¿å‘Š", SdkConfig.AdServiceEnabled);
         SdkConfig.AdMaxEnabled = EditorGUILayout.BeginToggleGroup("AppLovin MAX", SdkConfig.AdMaxEnabled);
         EditorGUILayout.EndToggleGroup();
         EditorGUILayout.EndToggleGroup();
         GUILayout.Space(25);
 
         // ----------------- Conversion -----------------
-        GUILayout.Label("¹éÒò·şÎñÅäÖÃ", EditorStyles.boldLabel);
+        GUILayout.Label("å½’å› æœåŠ¡é…ç½®", EditorStyles.boldLabel);
         GUILayout.Space(10);
-        SdkConfig.ConversionServiceEnabled = EditorGUILayout.BeginToggleGroup("¼¯³É¹éÒò", SdkConfig.ConversionServiceEnabled);
+        SdkConfig.ConversionServiceEnabled = EditorGUILayout.BeginToggleGroup("é›†æˆå½’å› ", SdkConfig.ConversionServiceEnabled);
         SdkConfig.ConversionAppsFlyerEnabled = EditorGUILayout.BeginToggleGroup("AppsFlyer", SdkConfig.ConversionAppsFlyerEnabled);
         EditorGUILayout.EndToggleGroup();
         GUILayout.Space(10);
@@ -65,32 +65,32 @@ class SdkConfigEditorWindow : EditorWindow
         GUILayout.Space(25);
 
         // ----------------- Account -----------------
-        GUILayout.Label("Èı·½µÇÂ¼·şÎñÅäÖÃ", EditorStyles.boldLabel);
+        GUILayout.Label("ä¸‰æ–¹ç™»å½•æœåŠ¡é…ç½®", EditorStyles.boldLabel);
         GUILayout.Space(10);
-        SdkConfig.AccountServiceEnabled = EditorGUILayout.BeginToggleGroup("¼¯³ÉÈı·½µÇÂ¼", SdkConfig.AccountServiceEnabled);
+        SdkConfig.AccountServiceEnabled = EditorGUILayout.BeginToggleGroup("é›†æˆä¸‰æ–¹ç™»å½•", SdkConfig.AccountServiceEnabled);
         SdkConfig.GooglePlayGamesProjectId = EditorGUILayout.TextField("GP Games ProjectID", SdkConfig.GooglePlayGamesProjectId);
         EditorGUILayout.EndToggleGroup();
         GUILayout.Space(25);
 
         // ----------------- Push -----------------
-        GUILayout.Label("ÍÆËÍ·şÎñÅäÖÃ", EditorStyles.boldLabel);
+        GUILayout.Label("æ¨é€æœåŠ¡é…ç½®", EditorStyles.boldLabel);
         GUILayout.Space(10);
-        SdkConfig.PushServiceEnabled = EditorGUILayout.BeginToggleGroup("¼¯³ÉÍÆËÍ", SdkConfig.PushServiceEnabled);
+        SdkConfig.PushServiceEnabled = EditorGUILayout.BeginToggleGroup("é›†æˆæ¨é€", SdkConfig.PushServiceEnabled);
         SdkConfig.PushFirebaseEnabled = EditorGUILayout.BeginToggleGroup("Firebase", SdkConfig.PushFirebaseEnabled);
         EditorGUILayout.EndToggleGroup();
         EditorGUILayout.EndToggleGroup();
         GUILayout.Space(25);
 
-        // ----------------- ¹«¹² -----------------
-        GUILayout.Label("Èı·½SDK¹«ÓÃÅäÖÃ", EditorStyles.boldLabel);
+        // ----------------- å…¬å…± -----------------
+        GUILayout.Label("ä¸‰æ–¹SDKå…¬ç”¨é…ç½®", EditorStyles.boldLabel);
         SdkConfig.FacebookAppId = EditorGUILayout.TextField("Faacebook AppID", SdkConfig.FacebookAppId);
         SdkConfig.FacebookClientToken = EditorGUILayout.TextField("Facebook ClientToken", SdkConfig.FacebookClientToken);
         GUILayout.Space(25);
 
-        if (GUILayout.Button("±£´æ"))
+        if (GUILayout.Button("ä¿å­˜"))
         {
             SdkConfig.Save();
-            ShowNotification(new GUIContent("±£´æ³É¹¦"));
+            ShowNotification(new GUIContent("ä¿å­˜æˆåŠŸ"));
         }
 
         EditorGUILayout.EndScrollView();

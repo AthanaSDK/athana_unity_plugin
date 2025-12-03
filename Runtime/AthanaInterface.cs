@@ -47,6 +47,9 @@ namespace Athana.Api
             BY_CLIENT_SELF
         }
 
+        /// <summary>
+        /// 账户信息
+        /// </summary>
         [Serializable]
         public class AccountInfo
         {
@@ -82,6 +85,9 @@ namespace Athana.Api
 
         }
 
+        /// <summary>
+        /// 账户属性
+        /// </summary>
         [Serializable]
         public class UserProperty
         {
@@ -161,23 +167,58 @@ namespace Athana.Api
             public string open_id;
         }
 
+        /// <summary>
+        /// 横幅广告展示位置
+        /// </summary>
         public enum AdAlignment
         {
+            /// <summary>
+            /// 顶部靠左
+            /// </summary>
             TOP_START,
+            /// <summary>
+            /// 顶部居中
+            /// </summary>
             TOP_CENTER,
+            /// <summary>
+            /// 顶部靠右
+            /// </summary>
             TOP_END,
+            /// <summary>
+            /// 底部靠左
+            /// </summary>
             BOTTOM_START,
+            /// <summary>
+            /// 底部居中
+            /// </summary>
             BOTTOM_CENTER,
+            /// <summary>
+            /// 底部靠右
+            /// </summary>
             BOTTOM_END
         }
 
+        /// <summary>
+        /// 横幅广告尺寸
+        /// </summary>
         [Serializable]
         public class AdSize
         {
+            /// <summary>
+            /// 宽度
+            /// </summary>
             public int width;
 
+            /// <summary>
+            /// 高度
+            /// </summary>
             public int height;
 
+            /// <summary>
+            /// 宽度自适应
+            /// </summary>
+            /// <param name="height">高度</param>
+            /// <returns></returns>
             public static AdSize fullWidth(int height)
             {
                 return new()
@@ -188,16 +229,36 @@ namespace Athana.Api
             }
         }
 
+        /// <summary>
+        /// 横幅广告
+        /// </summary>
         public interface BannerAd
         {
+            /// <summary>
+            /// 展示
+            /// </summary>
             void Show();
 
+            /// <summary>
+            /// 隐藏
+            /// </summary>
             void Hide();
 
+            /// <summary>
+            /// 更改尺寸
+            /// </summary>
+            /// <param name="size"></param>
             void UpdateSize(AdSize size);
 
+            /// <summary>
+            /// 更改位置
+            /// </summary>
+            /// <param name="alignment"></param>
             void UpdateAlignment(AdAlignment alignment);
 
+            /// <summary>
+            /// 销毁
+            /// </summary>
             void Destroy();
         }
 
@@ -237,6 +298,9 @@ namespace Athana.Api
             AppOpen
         }
 
+        /// <summary>
+        /// 广告信息
+        /// </summary>
         [Serializable]
         public class ProxyAd
         {
@@ -296,6 +360,10 @@ namespace Athana.Api
             /// </summary>
             public string? revenuePrecision;
 
+            /// <summary>
+            /// 获取对应的广告类型枚举
+            /// </summary>
+            /// <returns></returns>
             public AdType getAdType()
             {
                 switch (type)
@@ -329,6 +397,9 @@ namespace Athana.Api
             public string networkErrorMessage;
         }
 
+        /// <summary>
+        /// 商品信息
+        /// </summary>
         [Serializable]
         public class IapProduct
         {
@@ -382,6 +453,9 @@ namespace Athana.Api
             public int? subsInex;
         }
 
+        /// <summary>
+        /// 订单状态
+        /// </summary>
         public enum PurchaseState
         {
             /// <summary>
@@ -410,6 +484,9 @@ namespace Athana.Api
             RESTORE
         }
 
+        /// <summary>
+        /// 订单信息
+        /// </summary>
         [Serializable]
         public class IapPurchase
         {
@@ -444,50 +521,117 @@ namespace Athana.Api
             public bool? isAutoRenewing;
         }
 
+        /// <summary>
+        /// 服务配置
+        /// </summary>
         public class AthanaServiceConfig
         {
+            /// <summary>
+            /// 三方账号服务配置
+            /// </summary>
             public AccountServiceConfig? AccountConfig;
+            /// <summary>
+            /// 广告服务配置
+            /// </summary>
             public AdServiceConfigs? AdServiceConfigs;
+            /// <summary>
+            /// 归因服务配置
+            /// </summary>
             public ConversionServiceConfigs? ConversionServiceConfigs;
         }
 
+        /// <summary>
+        /// 三方账号服务配置
+        /// </summary>
         [Serializable]
         public class AccountServiceConfig
         {
+            /// <summary>
+            /// Google 登录所需的 WebClientID
+            /// </summary>
             public string googleWebClientId;
+
+            /// <summary>
+            /// 可供使用的登录方式，不设置表示全开
+            /// </summary>
             public List<SignInType>? enabledSignInTypes = null;
         }
 
+        /// <summary>
+        /// 广告服务配置
+        /// </summary>
         [Serializable]
         public class AdServiceConfigs
         {
+            /// <summary>
+            /// AppLovin MAX 配置
+            /// </summary>
             public MaxAdServiceConfig? max;
         }
 
+        /// <summary>
+        /// AppLovin MAX 配置
+        /// </summary>
         [Serializable]
         public class MaxAdServiceConfig
         {
+            /// <summary>
+            /// 开发者Key
+            /// </summary>
             public string sdkKey;
+            /// <summary>
+            /// 隐私政策链接
+            /// </summary>
             public string? privacyPolicyUrl;
+            /// <summary>
+            /// 用户协议链接
+            /// </summary>
             public string? termsOfServiceUrl;
+            /// <summary>
+            /// 调试日志开关
+            /// </summary>
             public bool debug = false;
+            /// <summary>
+            /// 预加载配置
+            /// </summary>
             public string? preloadAds;
+            /// <summary>
+            /// 自动加载下一个广告开关
+            /// </summary>
             public bool autoLoadNext = true;
         }
 
+        /// <summary>
+        /// 归因服务配置
+        /// </summary>
         [Serializable]
         public class ConversionServiceConfigs
         {
+            /// <summary>
+            /// AppsFlyer配置
+            /// </summary>
             public AppsFlyerServiceConfig appsflyer;
         }
 
+        /// <summary>
+        /// AppsFlyer配置
+        /// </summary>
         [Serializable]
         public class AppsFlyerServiceConfig
         {
+            /// <summary>
+            /// 开发者key
+            /// </summary>
             public string sdkKey;
+            /// <summary>
+            /// 是否手动启动
+            /// </summary>
             public bool manualStart = false;
         }
 
+        /// <summary>
+        /// SDK错误类型
+        /// </summary>
         public enum ErrorType
         {
             /// <summary>
@@ -516,10 +660,19 @@ namespace Athana.Api
             SDK_USER_CANCELLED,
         }
 
+        /// <summary>
+        /// SDK错误
+        /// </summary>
         [Serializable]
         public class SdkError
         {
+            /// <summary>
+            /// 错误类型
+            /// </summary>
             public ErrorType type;
+            /// <summary>
+            /// 错误信息
+            /// </summary>
             public string message;
         }
 

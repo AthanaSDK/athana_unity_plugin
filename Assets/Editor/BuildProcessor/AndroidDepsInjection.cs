@@ -46,7 +46,7 @@ class AndroidDepsInjection : AndroidProjectFilesModifier
             }
             else
             {
-                Debug.LogWarning($"{sourceFile} ÎÄ¼ş²»´æÔÚ£¡");
+                Debug.LogWarning($"{sourceFile} æ–‡ä»¶ä¸å­˜åœ¨ï¼");
             }
         }
         return projectFilesContext;
@@ -63,7 +63,7 @@ class AndroidDepsInjection : AndroidProjectFilesModifier
         if (SdkConfig.ImportConversionFirebase() || SdkConfig.ImportPushFirebase())
         {
             
-            // Èç¹ûĞèÒªÍ¶·ÅÖÁ Google Ads£¬ÔòĞèÒªÌí¼Ó Google-Services ºÍ Firebase ²å¼ş
+            // å¦‚æœéœ€è¦æŠ•æ”¾è‡³ Google Adsï¼Œåˆ™éœ€è¦æ·»åŠ  Google-Services å’Œ Firebase æ’ä»¶
             CustomGradleFile.ApplyPluginList.AddPluginByName("com.google.gms.google-services");
             CustomGradleFile.ApplyPluginList.AddPluginByName("com.google.firebase.crashlytics");
         }

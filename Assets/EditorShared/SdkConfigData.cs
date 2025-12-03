@@ -24,11 +24,11 @@ public class SdkConfigData
     public bool PushServiceEnabled = false;
     public bool PushFirebaseEnabled = false;
 
-    // -------- Í¨ÓÃ
+    // -------- é€šç”¨
     public string FacebookAppId = "";
     public string FacebookClientToken = "";
 
-    public string AndroidDepsVersion = "1.3.4";
+    public string AndroidDepsVersion = "1.3.5";
 
     public static SdkConfigData ReadForFile()
     {

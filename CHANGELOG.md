@@ -1,6 +1,14 @@
 Athana Unity Plugin Change Log
 
 **************
+Version 1.3.5
+**************
+
+- Add StoreIsAvailable Func
+- Fixed Android ProGuard R8 rule
+
+
+**************
 Version 1.3.3
 **************
 
