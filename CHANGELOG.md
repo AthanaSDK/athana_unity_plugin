@@ -1,6 +1,14 @@
 Athana Unity Plugin Change Log
 
 **************
+Version 1.4.0
+**************
+
+- Changed JsonUtility to Newtonsoft.Json
+- Update Athana for Android SDK version
+
+
+**************
 Version 1.3.5
 **************
 

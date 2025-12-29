@@ -1,6 +1,6 @@
 {
   "name": "com.inonesdk.athana",
-  "version": "1.3.5",
+  "version": "1.4.0",
   "displayName": "Athana SDK for Unity",
   "description": "Athana Unity plugin for Android and iOS.",
   "keywords": [
@@ -10,5 +10,8 @@
   "author": {
     "name": "CWJoy",
     "url": "https://athana.inonesdk.com"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.2"
   }
 }

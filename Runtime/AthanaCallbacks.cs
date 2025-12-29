@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Athana.Api;
+using Newtonsoft.Json;
 
 #nullable enable
 namespace Athana.Callbacks
@@ -233,15 +234,6 @@ namespace Athana.Callbacks
             }
         }
 
-        [Serializable]
-        private class SdkResult
-        {
-            public string functionName;
-            public string? data;
-            public string? message;
-            public string? error;
-        }
-
         public class SdkCallback<T>
         {
             public T? data { get; private set; }
@@ -264,7 +256,7 @@ namespace Athana.Callbacks
         {
             AthanaLogger.D("DispatchEvent: RAW DATA(" + json + ")");
 
-            var result = JsonUtility.FromJson<SdkResult>(json);
+            var result = JsonConvert.DeserializeObject<AthanaInterface.SdkResult>(json);
             if (result == null)
             {
                 AthanaLogger.D("Event data decode failed");
@@ -517,14 +509,14 @@ namespace Athana.Callbacks
             if (errorJson != null)
             {
                 // 调用异常
-                AthanaInterface.SdkError error = JsonUtility.FromJson<AthanaInterface.SdkError>(errorJson);
+                AthanaInterface.SdkError? error = JsonConvert.DeserializeObject<AthanaInterface.SdkError>(errorJson);
                 List<T>? data = null;
                 var paramData = new SdkCallback<List<T>>(data, error);
                 InvokeEvent(act, paramData, funcName);
             }
             else
             {
-                var wrapper = JsonUtility.FromJson<ListWrapper<T>>(dataJson);
+                var wrapper = JsonConvert.DeserializeObject<ListWrapper<T>>(dataJson);
                 var paramData = new SdkCallback<List<T>>(wrapper.items);
                 InvokeEvent(act, paramData, funcName);
             }
@@ -535,14 +527,14 @@ namespace Athana.Callbacks
             if (errorJson != null)
             {
                 // 调用异常
-                AthanaInterface.SdkError error = JsonUtility.FromJson<AthanaInterface.SdkError>(errorJson);
+                AthanaInterface.SdkError? error = JsonConvert.DeserializeObject<AthanaInterface.SdkError>(errorJson);
                 T? data = default;
                 var paramData = new SdkCallback<T>(data, error);
                 InvokeEvent(act, paramData, funcName);
             }
             else
             {
-                T data = JsonUtility.FromJson<T>(dataJson);
+                T? data = JsonConvert.DeserializeObject<T>(dataJson);
                 var paramData = new SdkCallback<T>(data);
                 InvokeEvent(act, paramData, funcName);
             }
@@ -553,7 +545,7 @@ namespace Athana.Callbacks
             if (errorJson != null)
             {
                 // 调用异常
-                AthanaInterface.SdkError error = JsonUtility.FromJson<AthanaInterface.SdkError>(errorJson);
+                AthanaInterface.SdkError? error = JsonConvert.DeserializeObject<AthanaInterface.SdkError>(errorJson);
                 var paramData = new SdkCallback<object?>(null, error);
                 InvokeEvent(act, paramData, funcName);
             }

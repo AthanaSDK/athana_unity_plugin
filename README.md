@@ -1,29 +1,29 @@
 # Athana SDK for Unity
 
-´Ë²å¼şÊÊÓÃÓÚ Unity Editor Æ½Ì¨£¬×îµÍÖ§³Ö Unity Editor 2023.1
+æ­¤æ’ä»¶é€‚ç”¨äº Unity Editor å¹³å°ï¼Œæœ€ä½æ”¯æŒ Unity Editor 2023.1
 
-## °²×°
+## å®‰è£…
 
-- ·½Ê½Ò»£º±¾µØ UnityPackage °²×°
-    - ´ÓÁ´½ÓÖĞÏÂÔØ£º[Release Page](https://github.com/AthanaSDK/athana_unity_plugin/releases)
-- ·½Ê½¶ş£ºÍ¨¹ı Git URL °²×°
-    - ´ò¿ª Package Manager (`Window -> Package Manger`)
-    - µã»÷×óÉÏ½Ç + Í¼±ê£¬Ñ¡Ôñ£º`Install Package form git URL`
-    - ÊäÈë£º`https://github.com/AthanaSDK/athana_unity_plugin.git`
+- æ–¹å¼ä¸€ï¼šæœ¬åœ° UnityPackage å®‰è£…
+    - ä»é“¾æ¥ä¸­ä¸‹è½½ï¼š[Release Page](https://github.com/AthanaSDK/athana_unity_plugin/releases)
+- æ–¹å¼äºŒï¼šé€šè¿‡ Git URL å®‰è£…
+    - æ‰“å¼€ Package Manager (`Window -> Package Manger`)
+    - ç‚¹å‡»å·¦ä¸Šè§’ + å›¾æ ‡ï¼Œé€‰æ‹©ï¼š`Install Package form git URL`
+    - è¾“å…¥ï¼š`https://github.com/AthanaSDK/athana_unity_plugin.git`
 
-## ¼¯³ÉÅäÖÃ
+## é›†æˆé…ç½®
 
-1. È·ÈÏ `Edit -> Project Settings -> Player -> Settings for Android -> Publishing Settings -> Build` ÖĞ£¬¹´Ñ¡£º
+1. ç¡®è®¤ `Edit -> Project Settings -> Player -> Settings for Android -> Publishing Settings -> Build` ä¸­ï¼Œå‹¾é€‰ï¼š
     - `Custom Launcher Gradle Template`
     - `Custom Base Gradle Template`
 
-2. ±à¼­ `${UNITY_PROJEECT}\Assets\Plugins\Android\baseProjectTemplate.gradle`
+2. ç¼–è¾‘ `${UNITY_PROJEECT}\Assets\Plugins\Android\baseProjectTemplate.gradle`
 
 ```groovy
 plugins {
     ...
 
-    // ²åÈë²å¼şÉùÃ÷¡ı
+    // æ’å…¥æ’ä»¶å£°æ˜â†“
     id "org.jetbrains.kotlin.android"  version "2.0.21" apply false
     id "com.google.gms.google-services" version "4.4.2" apply false
     id "com.google.firebase.crashlytics" version "3.0.4" apply false
@@ -35,11 +35,11 @@ plugins {
 ```
 
 
-3. ±à¼­ `${UNITY_PROJEECT}\Assets\Plugins\Android\launcherTemplate.gradle`
+3. ç¼–è¾‘ `${UNITY_PROJEECT}\Assets\Plugins\Android\launcherTemplate.gradle`
 
 ```groovy
 apply plugin: 'com.android.application'
-// ²åÈë²å¼şÓ¦ÓÃ ¡ı
+// æ’å…¥æ’ä»¶åº”ç”¨ â†“
 apply plugin: 'org.jetbrains.kotlin.android'
 apply from: 'athana_options.gradle'
 
@@ -47,6 +47,6 @@ apply from: 'athana_options.gradle'
 ```
 
 
-## ÎÄµµ
+## æ–‡æ¡£
 
-Ïê¼û£º[Unity ¼¯³ÉÎÄµµ](https://athana.inonesdk.com/docs/Unity-Install)
+è¯¦è§ï¼š[Unity é›†æˆæ–‡æ¡£](https://athana.inonesdk.com/docs/Unity-Install)

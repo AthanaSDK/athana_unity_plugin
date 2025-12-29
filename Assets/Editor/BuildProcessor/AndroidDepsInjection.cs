@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Unity.Android.Gradle;
@@ -54,6 +55,23 @@ class AndroidDepsInjection : AndroidProjectFilesModifier
 
     public override void OnModifyAndroidProjectFiles(AndroidProjectFiles projectFiles)
     {
+        var androidSdkVer = SdkConfig.AndroidDepsVersion.Replace("-SNAPSHOT", "");
+        var verArray = androidSdkVer.Split('.');
+        if (verArray.Length != 3)
+        {
+            throw new Exception("Sdk Version is error");
+        }
+        else
+        {
+            var majorVer = int.Parse(verArray[0]);
+            var minorVer = int.Parse(verArray[1]);
+            var patchVer = int.Parse(verArray[2]);
+
+            if (majorVer <= 1 && minorVer < 4)
+            {
+                throw new Exception("SDK 版本过低，请升级至 1.4.1 或更高版本");
+            }
+        }
 
         List<string> Components = Transfor(SdkConfig);
 

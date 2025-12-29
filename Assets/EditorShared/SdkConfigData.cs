@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +29,7 @@ public class SdkConfigData
     public string FacebookAppId = "";
     public string FacebookClientToken = "";
 
-    public string AndroidDepsVersion = "1.3.5";
+    public string AndroidDepsVersion = "1.4.0";
 
     public static SdkConfigData ReadForFile()
     {
@@ -43,7 +44,7 @@ public class SdkConfigData
         }
         else
         {
-            return JsonUtility.FromJson<SdkConfigData>(json);
+            return JsonConvert.DeserializeObject<SdkConfigData>(json);
         }
     }
 

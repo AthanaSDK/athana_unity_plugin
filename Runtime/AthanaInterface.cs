@@ -1,6 +1,6 @@
+using Athana.Callbacks;
 using System;
 using System.Collections.Generic;
-using Athana.Callbacks;
 
 #if UNITY_IOS && !UNITY_EDITOR
 using System.Runtime.InteropServices;
@@ -450,7 +450,7 @@ namespace Athana.Api
             /// <summary>
             /// 订阅价格下标
             /// </summary>
-            public int? subsInex;
+            public int subsInex;
         }
 
         /// <summary>
@@ -629,6 +629,17 @@ namespace Athana.Api
             public bool manualStart = false;
         }
 
+        [Serializable]
+        public class SdkResult
+        {
+            public string functionName;
+            public string? data;
+            public int errorCode;
+            public string? message;
+            public string? error;
+        }
+
+
         /// <summary>
         /// SDK错误类型
         /// </summary>
@@ -669,11 +680,25 @@ namespace Athana.Api
             /// <summary>
             /// 错误类型
             /// </summary>
-            public ErrorType type;
+            public ErrorType? type;
+
+            /// <summary>
+            /// 平台错误码
+            /// 
+            /// -1 则表示平台返回null值
+            /// </summary>
+            public int? errorCode;
+
             /// <summary>
             /// 错误信息
             /// </summary>
-            public string message;
+            public string? detailMessage;
+
+            /// <summary>
+            /// 额外信息
+            /// </summary>
+            public string? msg;
+
         }
 
         protected static void HandleSdkCallbackResult(string content)

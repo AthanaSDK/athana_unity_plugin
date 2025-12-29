@@ -7,14 +7,14 @@ using System;
 public class AthanaUnityEditor : AthanaInterface
 {
     /// <summary>
-    /// SDK ³õÊ¼»¯
+    /// SDK åˆå§‹åŒ–
     /// </summary>
-    /// <param name="appId">Ó¦ÓÃID</param>
-    /// <param name="appKey">Ó¦ÓÃKey</param>
-    /// <param name="appSecret">Ó¦ÓÃSecret</param>
-    /// <param name="serviceConfig">·şÎñÅäÖÃ</param>
-    /// <param name="testMode">Ö§¸¶²âÊÔÄ£Ê½</param>
-    /// <param name="debug">SDKµ÷ÊÔÄ£Ê½£¬Ä¬ÈÏÎª false£¬ÉèÖÃ true ½«ÔÚÈÕÖ¾ÖĞÊä³öµ÷ÊÔÈÕÖ¾</param>
+    /// <param name="appId">åº”ç”¨ID</param>
+    /// <param name="appKey">åº”ç”¨Key</param>
+    /// <param name="appSecret">åº”ç”¨Secret</param>
+    /// <param name="serviceConfig">æœåŠ¡é…ç½®</param>
+    /// <param name="testMode">æ”¯ä»˜æµ‹è¯•æ¨¡å¼</param>
+    /// <param name="debug">SDKè°ƒè¯•æ¨¡å¼ï¼Œé»˜è®¤ä¸º falseï¼Œè®¾ç½® true å°†åœ¨æ—¥å¿—ä¸­è¾“å‡ºè°ƒè¯•æ—¥å¿—</param>
     public static void Initialize(
         long appId, 
         string appKey, 
@@ -29,16 +29,16 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// Æô¶¯SDK£¬ÇëÔÚSDK³õÊ¼»¯ºóµ÷ÓÃ
+    /// å¯åŠ¨SDKï¼Œè¯·åœ¨SDKåˆå§‹åŒ–åè°ƒç”¨
     /// </summary>
-    /// <param name="privacyGrant">ÓÃ»§¶ÔÒşË½Ğ­ÒéµÄÈ·ÈÏ½á¹û</param>
+    /// <param name="privacyGrant">ç”¨æˆ·å¯¹éšç§åè®®çš„ç¡®è®¤ç»“æœ</param>
     public static void Start(bool privacyGrant)
     {
         AthanaLogger.D("Calling Start on Unity Editor");
     }
 
     /// <summary>
-    /// »ñÈ¡µ±Ç°µÇÈëµÄÕË»§ĞÅÏ¢£¬Èç·µ»Ø null Ôò±íÊ¾Î´µÇÈë»òÆ¾Ö¤Ê§Ğ§
+    /// è·å–å½“å‰ç™»å…¥çš„è´¦æˆ·ä¿¡æ¯ï¼Œå¦‚è¿”å› null åˆ™è¡¨ç¤ºæœªç™»å…¥æˆ–å‡­è¯å¤±æ•ˆ
     /// </summary>
     public static void CurrentUser()
     {
@@ -46,13 +46,13 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ×¢²áÆ½Ì¨ÓÃ»§
+    /// æ³¨å†Œå¹³å°ç”¨æˆ·
     /// </summary>
-    /// <param name="signInType">µÇÈë·½Ê½</param>
-    /// <param name="ua">Éè±¸ĞÅÏ¢£¬¿ÉÑ¡²ÎÊı£¬²»´«ÈëÔò»á×Ô¶¯»ñÈ¡Éè±¸µÄWebViewÄÚµÄUser-Agent</param>
-    /// <param name="deviceId">Éè±¸±êÊ¶£¬¿ÉÑ¡²ÎÊı£¬²»´«ÈëÔòÔÚ Android Æ½Ì¨ÉÏ»á»ñÈ¡ ANDROID_ID</param>
-    /// <param name="customUserId">×Ô¶¨ÒåÓÃ»§ID - ÓÎÏ·ÓÃ»§ID</param>
-    /// <param name="extra">¶îÍâ²ÎÊı</param>
+    /// <param name="signInType">ç™»å…¥æ–¹å¼</param>
+    /// <param name="ua">è®¾å¤‡ä¿¡æ¯ï¼Œå¯é€‰å‚æ•°ï¼Œä¸ä¼ å…¥åˆ™ä¼šè‡ªåŠ¨è·å–è®¾å¤‡çš„WebViewå†…çš„User-Agent</param>
+    /// <param name="deviceId">è®¾å¤‡æ ‡è¯†ï¼Œå¯é€‰å‚æ•°ï¼Œä¸ä¼ å…¥åˆ™åœ¨ Android å¹³å°ä¸Šä¼šè·å– ANDROID_ID</param>
+    /// <param name="customUserId">è‡ªå®šä¹‰ç”¨æˆ·ID - æ¸¸æˆç”¨æˆ·ID</param>
+    /// <param name="extra">é¢å¤–å‚æ•°</param>
     public static void RegistryUser(
         AthanaInterface.SignInType signInType = AthanaInterface.SignInType.ANONYMOUS,
         string? ua = null,
@@ -65,13 +65,13 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// µÇÈë
+    /// ç™»å…¥
     /// </summary>
-    /// <param name="signInType">µÇÈë·½Ê½</param>
-    /// <param name="ua">Éè±¸ĞÅÏ¢£¬¿ÉÑ¡²ÎÊı£¬²»´«ÈëÔò»á×Ô¶¯»ñÈ¡Éè±¸µÄWebViewÄÚµÄUser-Agent</param>
-    /// <param name="deviceId">Éè±¸±êÊ¶£¬¿ÉÑ¡²ÎÊı£¬²»´«ÈëÔòÔÚ Android Æ½Ì¨ÉÏ»á»ñÈ¡ ANDROID_ID</param>
-    /// <param name="customUserId">×Ô¶¨ÒåÓÃ»§ID - ÓÎÏ·ÓÃ»§ID</param>
-    /// <param name="extra">¶îÍâ²ÎÊı</param>
+    /// <param name="signInType">ç™»å…¥æ–¹å¼</param>
+    /// <param name="ua">è®¾å¤‡ä¿¡æ¯ï¼Œå¯é€‰å‚æ•°ï¼Œä¸ä¼ å…¥åˆ™ä¼šè‡ªåŠ¨è·å–è®¾å¤‡çš„WebViewå†…çš„User-Agent</param>
+    /// <param name="deviceId">è®¾å¤‡æ ‡è¯†ï¼Œå¯é€‰å‚æ•°ï¼Œä¸ä¼ å…¥åˆ™åœ¨ Android å¹³å°ä¸Šä¼šè·å– ANDROID_ID</param>
+    /// <param name="customUserId">è‡ªå®šä¹‰ç”¨æˆ·ID - æ¸¸æˆç”¨æˆ·ID</param>
+    /// <param name="extra">é¢å¤–å‚æ•°</param>
     public static void SignIn(
         AthanaInterface.SignInType signInType = AthanaInterface.SignInType.ANONYMOUS,
         string? ua = null,
@@ -83,10 +83,10 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// Ê¹ÓÃÄÚÖÃUIµÇÈë
+    /// ä½¿ç”¨å†…ç½®UIç™»å…¥
     /// </summary>
-    /// <param name="enabledSignInTypes">ÅäÖÃ¿É¹©Ê¹ÓÃµÄµÇÈë·½Ê½£¬Ä¬ÈÏÎª null ±êÊ¶È«¿ª</param>
-    /// <param name="customUserId">×Ô¶¨ÒåÓÃ»§ID - ÓÎÏ·ÓÃ»§ID</param>
+    /// <param name="enabledSignInTypes">é…ç½®å¯ä¾›ä½¿ç”¨çš„ç™»å…¥æ–¹å¼ï¼Œé»˜è®¤ä¸º null æ ‡è¯†å…¨å¼€</param>
+    /// <param name="customUserId">è‡ªå®šä¹‰ç”¨æˆ·ID - æ¸¸æˆç”¨æˆ·ID</param>
     /// <param name="privacyPolicyUrl"></param>
     /// <param name="termsOfServiceUrl"></param>
     public static void SignInWithUI(
@@ -99,7 +99,7 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// µÇ³ö
+    /// ç™»å‡º
     /// </summary>
     public static void SignOut()
     {
@@ -107,10 +107,10 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// °ó¶¨Èı·½ÕËºÅ
+    /// ç»‘å®šä¸‰æ–¹è´¦å·
     /// </summary>
-    /// <param name="signInType">µÇÈë·½Ê½</param>
-    /// <param name="extra">¶îÍâ²ÎÊı</param>
+    /// <param name="signInType">ç™»å…¥æ–¹å¼</param>
+    /// <param name="extra">é¢å¤–å‚æ•°</param>
     public static void AccountBinding(
         AthanaInterface.SignInType signInType,
         Dictionary<string, object>? extra = null)
@@ -119,11 +119,11 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ½â°óÈı·½ÕËºÅ
+    /// è§£ç»‘ä¸‰æ–¹è´¦å·
     /// </summary>
-    /// <param name="signInType">µÇÈë·½Ê½</param>
-    /// <param name="triOpenID">Èı·½OpenID£¬´Ó²éÑ¯Èı·½ÕËºÅ°ó¶¨ĞÅÏ¢½Ó¿Ú»ñÈ¡</param>
-    /// <param name="extra">¶îÍâ²ÎÊı£¬¿ÉÑ¡²ÎÊı</param>
+    /// <param name="signInType">ç™»å…¥æ–¹å¼</param>
+    /// <param name="triOpenID">ä¸‰æ–¹OpenIDï¼Œä»æŸ¥è¯¢ä¸‰æ–¹è´¦å·ç»‘å®šä¿¡æ¯æ¥å£è·å–</param>
+    /// <param name="extra">é¢å¤–å‚æ•°ï¼Œå¯é€‰å‚æ•°</param>
     public static void AccountUnbind(
         AthanaInterface.SignInType signInType,
         string triOpenID,
@@ -133,19 +133,19 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ²éÑ¯Èı·½ÕËºÅ°ó¶¨ĞÅÏ¢
+    /// æŸ¥è¯¢ä¸‰æ–¹è´¦å·ç»‘å®šä¿¡æ¯
     /// </summary>
-    /// <param name="extra">¶îÍâ²ÎÊı£¬¿ÉÑ¡²ÎÊı</param>
+    /// <param name="extra">é¢å¤–å‚æ•°ï¼Œå¯é€‰å‚æ•°</param>
     public static void QueryAllAccountBind(Dictionary<string, object>? extra = null)
     {
         AthanaLogger.D("Calling QueryAllAccountBind on Unity Editor");
     }
 
     /// <summary>
-    /// ¼ÓÔØÓ¦ÓÃÆô¶¯¹ã¸æ
+    /// åŠ è½½åº”ç”¨å¯åŠ¨å¹¿å‘Š
     /// </summary>
-    /// <param name="adUnitId">¹ã¸æÎ»ID</param>
-    /// <returns>µ÷ÓÃ½á¹û</returns>
+    /// <param name="adUnitId">å¹¿å‘Šä½ID</param>
+    /// <returns>è°ƒç”¨ç»“æœ</returns>
     public static bool LoadAppOpenAd(string adUnitId)
     {
         AthanaLogger.D("Calling LoadAppOpenAd on Unity Editor");
@@ -153,10 +153,10 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ÅĞ¶ÏÓ¦ÓÃÆô¶¯¹ã¸æÊÇ·ñÒÑ×¼±¸ºÃÕ¹Ê¾
+    /// åˆ¤æ–­åº”ç”¨å¯åŠ¨å¹¿å‘Šæ˜¯å¦å·²å‡†å¤‡å¥½å±•ç¤º
     /// </summary>
-    /// <param name="adUnitId">¹ã¸æÎ»ID</param>
-    /// <returns>true - ¿ÉÕ¹Ê¾£»false - ²»¿ÉÕ¹Ê¾</returns>
+    /// <param name="adUnitId">å¹¿å‘Šä½ID</param>
+    /// <returns>true - å¯å±•ç¤ºï¼›false - ä¸å¯å±•ç¤º</returns>
     public static bool IsReadyAppOpenAd(string adUnitId)
     {
         AthanaLogger.D("Calling IsReadyAppOpenAd on Unity Editor");
@@ -164,11 +164,11 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// Õ¹Ê¾Ó¦ÓÃÆô¶¯¹ã¸æ
+    /// å±•ç¤ºåº”ç”¨å¯åŠ¨å¹¿å‘Š
     /// </summary>
-    /// <param name="adUnitId">¹ã¸æÎ»ID</param>
-    /// <param name="placement">Õ¹Ê¾Î»ÖÃ±êÊ¶£¬ÀıÈç£ºXXScene - Ä³³¡¾°¡¢XXPage - Ä³Ò³Ãæ</param>
-    /// <returns>µ÷ÓÃ½á¹û</returns>
+    /// <param name="adUnitId">å¹¿å‘Šä½ID</param>
+    /// <param name="placement">å±•ç¤ºä½ç½®æ ‡è¯†ï¼Œä¾‹å¦‚ï¼šXXScene - æŸåœºæ™¯ã€XXPage - æŸé¡µé¢</param>
+    /// <returns>è°ƒç”¨ç»“æœ</returns>
     public static bool ShowAppOpenAd(string adUnitId, string? placement = null)
     {
         AthanaLogger.D("Calling ShowAppOpenAd on Unity Editor");
@@ -176,10 +176,10 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ¼ÓÔØ¼¤Àø¹ã¸æ
+    /// åŠ è½½æ¿€åŠ±å¹¿å‘Š
     /// </summary>
-    /// <param name="adUnitId">¹ã¸æÎ»ID</param>
-    /// <returns>µ÷ÓÃ½á¹û</returns>
+    /// <param name="adUnitId">å¹¿å‘Šä½ID</param>
+    /// <returns>è°ƒç”¨ç»“æœ</returns>
     public static bool LoadRewardedAd(string adUnitId)
     {
         AthanaLogger.D("Calling LoadRewardedAd on Unity Editor");
@@ -187,10 +187,10 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ÅĞ¶Ï¼¤Àø¹ã¸æÊÇ·ñÒÑ×¼±¸ºÃÕ¹Ê¾
+    /// åˆ¤æ–­æ¿€åŠ±å¹¿å‘Šæ˜¯å¦å·²å‡†å¤‡å¥½å±•ç¤º
     /// </summary>
-    /// <param name="adUnitId">¹ã¸æÎ»ID</param>
-    /// <returns>true - ¿ÉÕ¹Ê¾£»false - ²»¿ÉÕ¹Ê¾</returns>
+    /// <param name="adUnitId">å¹¿å‘Šä½ID</param>
+    /// <returns>true - å¯å±•ç¤ºï¼›false - ä¸å¯å±•ç¤º</returns>
     public static bool IsReadyRewardedAd(string adUnitId)
     {
         AthanaLogger.D("Calling IsReadyRewardedAd on Unity Editor");
@@ -198,10 +198,10 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// Õ¹Ê¾¼¤Àø¹ã¸æ
+    /// å±•ç¤ºæ¿€åŠ±å¹¿å‘Š
     /// </summary>
-    /// <param name="adUnitId">¹ã¸æÎ»ID</param>
-    /// <param name="placement">Õ¹Ê¾Î»ÖÃ±êÊ¶£¬ÀıÈç£ºXXScene - Ä³³¡¾°¡¢XXPage - Ä³Ò³Ãæ</param>
+    /// <param name="adUnitId">å¹¿å‘Šä½ID</param>
+    /// <param name="placement">å±•ç¤ºä½ç½®æ ‡è¯†ï¼Œä¾‹å¦‚ï¼šXXScene - æŸåœºæ™¯ã€XXPage - æŸé¡µé¢</param>
     /// <returns></returns>
     public static bool ShowRewardedAd(string adUnitId, string? placement = null)
     {
@@ -210,10 +210,10 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ¼ÓÔØ²åÆÁ¹ã¸æ
+    /// åŠ è½½æ’å±å¹¿å‘Š
     /// </summary>
-    /// <param name="adUnitId">¹ã¸æÎ»ID</param>
-    /// <returns>µ÷ÓÃ½á¹û</returns>
+    /// <param name="adUnitId">å¹¿å‘Šä½ID</param>
+    /// <returns>è°ƒç”¨ç»“æœ</returns>
     public static bool LoadInterstitialAd(string adUnitId)
     {
         AthanaLogger.D("Calling LoadInterstitialAd on Unity Editor");
@@ -221,10 +221,10 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ÅĞ¶Ï²åÆÁ¹ã¸æÊÇ·ñÒÑ×¼±¸ºÃÕ¹Ê¾
+    /// åˆ¤æ–­æ’å±å¹¿å‘Šæ˜¯å¦å·²å‡†å¤‡å¥½å±•ç¤º
     /// </summary>
-    /// <param name="adUnitId">¹ã¸æÎ»ID</param>
-    /// <returns>true - ¿ÉÕ¹Ê¾£»false - ²»¿ÉÕ¹Ê¾</returns>
+    /// <param name="adUnitId">å¹¿å‘Šä½ID</param>
+    /// <returns>true - å¯å±•ç¤ºï¼›false - ä¸å¯å±•ç¤º</returns>
     public static bool IsReadyInterstitialAd(string adUnitId)
     {
         AthanaLogger.D("Calling IsReadyInterstitialAd on Unity Editor");
@@ -232,10 +232,10 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// Õ¹Ê¾²åÆÁ¹ã¸æ
+    /// å±•ç¤ºæ’å±å¹¿å‘Š
     /// </summary>
-    /// <param name="adUnitId">¹ã¸æÎ»ID</param>
-    /// <param name="placement">Õ¹Ê¾Î»ÖÃ±êÊ¶£¬ÀıÈç£ºXXScene - Ä³³¡¾°¡¢XXPage - Ä³Ò³Ãæ</param>
+    /// <param name="adUnitId">å¹¿å‘Šä½ID</param>
+    /// <param name="placement">å±•ç¤ºä½ç½®æ ‡è¯†ï¼Œä¾‹å¦‚ï¼šXXScene - æŸåœºæ™¯ã€XXPage - æŸé¡µé¢</param>
     public static bool ShowInterstitialAd(string adUnitId, string? placement = null)
     {
         AthanaLogger.D("Calling ShowInterstitialAd on Unity Editor");
@@ -243,13 +243,13 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ´´½¨ºá·ù¹ã¸æ
+    /// åˆ›å»ºæ¨ªå¹…å¹¿å‘Š
     /// </summary>
-    /// <param name="adUnitId">¹ã¸æÎ»ID</param>
-    /// <param name="size">ºá·ù³ß´ç</param>
-    /// <param name="placement">Õ¹Ê¾Î»ÖÃ±êÊ¶£¬ÀıÈç£ºXXScene - Ä³³¡¾°¡¢XXPage - Ä³Ò³Ãæ</param>
-    /// <param name="alignment">ºá·ùÎ»ÖÃ</param>
-    /// <returns>·µ»Ønull±íÊ¾´´½¨Ê§°Ü</returns>
+    /// <param name="adUnitId">å¹¿å‘Šä½ID</param>
+    /// <param name="size">æ¨ªå¹…å°ºå¯¸</param>
+    /// <param name="placement">å±•ç¤ºä½ç½®æ ‡è¯†ï¼Œä¾‹å¦‚ï¼šXXScene - æŸåœºæ™¯ã€XXPage - æŸé¡µé¢</param>
+    /// <param name="alignment">æ¨ªå¹…ä½ç½®</param>
+    /// <returns>è¿”å›nullè¡¨ç¤ºåˆ›å»ºå¤±è´¥</returns>
     public static BannerAd? CreateBanner(string adUnitId, AdSize size, string? placement = null, AdAlignment alignment = AdAlignment.BOTTOM_CENTER)
     {
         AthanaLogger.D("Calling CreateBanner on Unity Editor");
@@ -257,7 +257,7 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ²éÑ¯ÉÌµê·şÎñÊÇ·ñ¿ÉÓÃ
+    /// æŸ¥è¯¢å•†åº—æœåŠ¡æ˜¯å¦å¯ç”¨
     /// </summary>
     /// <returns></returns>
     public static bool StoreIsAvailable()
@@ -267,21 +267,21 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ²éÑ¯ÉÌÆ·ĞÅÏ¢
+    /// æŸ¥è¯¢å•†å“ä¿¡æ¯
     /// </summary>
-    /// <param name="keys">´ı²éÉÌÆ·Key</param>
+    /// <param name="keys">å¾…æŸ¥å•†å“Key</param>
     public static void QueryProducts(HashSet<string> keys)
     {
         AthanaLogger.D("Calling QueryProducts on Unity Editor");
     }
 
     /// <summary>
-    /// ¹ºÂò
+    /// è´­ä¹°
     /// </summary>
-    /// <param name="product">Ğè¹ºÂòµÄÉÌÆ·ĞÅÏ¢</param>
-    /// <param name="clientOrderId">×Ô¶¨Òå¶©µ¥ - ÓÎÏ·ºó¶Ë¶©µ¥</param>
-    /// <param name="consumable">ÊÇ·ñ¿ÉÏûºÄ£¬Ä¬ÈÏÎª true¡£Èç¹ºÂòµÄÉÌÆ·ÊÇÏŞÖÆ¹ºÂò´ÎÊı£¬ÀıÈç£ºÓÀ¾ÃÈ¥¹ã¸æ£¬Ôò´«Èë false</param>
-    /// <param name="extra">¶îÍâ²ÎÊı£¬¿ÉÑ¡²ÎÊı</param>
+    /// <param name="product">éœ€è´­ä¹°çš„å•†å“ä¿¡æ¯</param>
+    /// <param name="clientOrderId">è‡ªå®šä¹‰è®¢å• - æ¸¸æˆåç«¯è®¢å•</param>
+    /// <param name="consumable">æ˜¯å¦å¯æ¶ˆè€—ï¼Œé»˜è®¤ä¸º trueã€‚å¦‚è´­ä¹°çš„å•†å“æ˜¯é™åˆ¶è´­ä¹°æ¬¡æ•°ï¼Œä¾‹å¦‚ï¼šæ°¸ä¹…å»å¹¿å‘Šï¼Œåˆ™ä¼ å…¥ false</param>
+    /// <param name="extra">é¢å¤–å‚æ•°ï¼Œå¯é€‰å‚æ•°</param>
     public static void Purchase(
         AthanaInterface.IapProduct product,
         long? clientOrderId = null,
@@ -292,7 +292,7 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ²éÑ¯¹ºÂòÀúÊ·¼ÇÂ¼£¬Ö»·µ»Ø£ºÎ´È·ÈÏµÄ¶©µ¥¡¢ÓĞĞ§ÆÚÄÚµÄ¶©ÔÄÏî¡¢·ÇÒ»´ÎĞÔÏûºÄÀàÉÌÆ·
+    /// æŸ¥è¯¢è´­ä¹°å†å²è®°å½•ï¼Œåªè¿”å›ï¼šæœªç¡®è®¤çš„è®¢å•ã€æœ‰æ•ˆæœŸå†…çš„è®¢é˜…é¡¹ã€éä¸€æ¬¡æ€§æ¶ˆè€—ç±»å•†å“
     /// </summary>
     public static void QueryPurchaseHistory()
     {
@@ -300,11 +300,11 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ÑéÖ¤¶©µ¥£¬ÊÊÓÃÓÚµôµ¥¸´Ñé
+    /// éªŒè¯è®¢å•ï¼Œé€‚ç”¨äºæ‰å•å¤éªŒ
     /// </summary>
-    /// <param name="purchase">´Ó²éÑ¯¹ºÂòÀúÊ·¼ÇÂ¼½Ó¿Ú»ñµÃµÄ¶©µ¥ĞÅÏ¢</param>
-    /// <param name="consumable">ÊÇ·ñ¿ÉÏûºÄ£¬Ä¬ÈÏÎª true¡£Èç¹ºÂòµÄÉÌÆ·ÊÇÏŞÖÆ¹ºÂò´ÎÊı£¬ÀıÈç£ºÓÀ¾ÃÈ¥¹ã¸æ£¬Ôò´«Èë false</param>
-    /// <param name="extra">¶îÍâ²ÎÊı£¬¿ÉÑ¡²ÎÊı</param>
+    /// <param name="purchase">ä»æŸ¥è¯¢è´­ä¹°å†å²è®°å½•æ¥å£è·å¾—çš„è®¢å•ä¿¡æ¯</param>
+    /// <param name="consumable">æ˜¯å¦å¯æ¶ˆè€—ï¼Œé»˜è®¤ä¸º trueã€‚å¦‚è´­ä¹°çš„å•†å“æ˜¯é™åˆ¶è´­ä¹°æ¬¡æ•°ï¼Œä¾‹å¦‚ï¼šæ°¸ä¹…å»å¹¿å‘Šï¼Œåˆ™ä¼ å…¥ false</param>
+    /// <param name="extra">é¢å¤–å‚æ•°ï¼Œå¯é€‰å‚æ•°</param>
     public static void VerifyOrder(
         AthanaInterface.IapPurchase purchase,
         bool consumable = true,
@@ -314,7 +314,7 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// À­ÆğÓ¦ÓÃÄÚÆÀ¼Û
+    /// æ‹‰èµ·åº”ç”¨å†…è¯„ä»·
     /// </summary>
     public static void RequestReview()
     {
@@ -322,11 +322,11 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ·¢ËÍÊÂ¼ş
+    /// å‘é€äº‹ä»¶
     /// </summary>
-    /// <param name="key">ÊÂ¼şÃû</param>
-    /// <param name="type">ÊÂ¼şÀàĞÍ£¬Ä¬ÈÏÎª game</param>
-    /// <param name="paramMap">ÊÂ¼ş²ÎÊı</param>
+    /// <param name="key">äº‹ä»¶å</param>
+    /// <param name="type">äº‹ä»¶ç±»å‹ï¼Œé»˜è®¤ä¸º game</param>
+    /// <param name="paramMap">äº‹ä»¶å‚æ•°</param>
     public static void SendEvent(string key, string type = "game", Dictionary<string, object>? paramMap = null)
     {
 
@@ -334,10 +334,10 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
-    /// ¸üĞÂÓÃ»§ĞÅÏ¢£¬ÊÊÓÃÓÚÍæ¼ÒÊ×´ÎµÇÈëºó£¬²¹³äÓÎÏ·×ÔÓĞÕË»§ÌåÏµµÄÕË»§ID
+    /// æ›´æ–°ç”¨æˆ·ä¿¡æ¯ï¼Œé€‚ç”¨äºç©å®¶é¦–æ¬¡ç™»å…¥åï¼Œè¡¥å……æ¸¸æˆè‡ªæœ‰è´¦æˆ·ä½“ç³»çš„è´¦æˆ·ID
     /// </summary>
-    /// <param name="customUserId">×Ô¶¨ÒåÓÃ»§ID - ÓÎÏ·ÕË»§ID</param>
-    /// <param name="extra">¶îÍâ²ÎÊı£¬¿ÉÑ¡</param>
+    /// <param name="customUserId">è‡ªå®šä¹‰ç”¨æˆ·ID - æ¸¸æˆè´¦æˆ·ID</param>
+    /// <param name="extra">é¢å¤–å‚æ•°ï¼Œå¯é€‰</param>
     public static void UpdateUserInfo(long customUserId, Dictionary<string, object>? extra = null)
     {
         AthanaLogger.D($"Calling UpdateUserInfo on Unity Editor");
