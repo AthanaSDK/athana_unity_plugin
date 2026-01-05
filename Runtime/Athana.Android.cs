@@ -144,7 +144,7 @@ public class AthanaAndroid : AthanaInterface
             AthanaLogger.W("Athana is not initialized");
             return;
         }
-        AndroidJavaObject? extraMap = extra == null ? null : toJavaMap(extra);
+        AndroidJavaObject? extraMap = extra == null ? null : ToJavaMap(extra);
 
         try
         {
@@ -179,7 +179,7 @@ public class AthanaAndroid : AthanaInterface
             return;
         }
 
-        AndroidJavaObject? extraMap = extra == null ? null : toJavaMap(extra);
+        AndroidJavaObject? extraMap = extra == null ? null : ToJavaMap(extra);
 
         AthanaUnityPluginClass.CallStatic("signIn", (int)signInType, ua, deviceId, customUserId, extraMap);
 
@@ -254,7 +254,7 @@ public class AthanaAndroid : AthanaInterface
             return;
         }
 
-        AndroidJavaObject? extraMap = extra == null ? null : toJavaMap(extra);
+        AndroidJavaObject? extraMap = extra == null ? null : ToJavaMap(extra);
 
         AthanaUnityPluginClass.CallStatic("accountBinding", (int)signInType, extraMap);
 
@@ -278,7 +278,7 @@ public class AthanaAndroid : AthanaInterface
             return;
         }
 
-        AndroidJavaObject? extraMap = extra == null ? null : toJavaMap(extra);
+        AndroidJavaObject? extraMap = extra == null ? null : ToJavaMap(extra);
 
         AthanaUnityPluginClass.CallStatic("accountUnbind", (int)signInType, triOpenID, extraMap);
 
@@ -297,7 +297,7 @@ public class AthanaAndroid : AthanaInterface
             return;
         }
 
-        AndroidJavaObject? extraMap = extra == null ? null : toJavaMap(extra);
+        AndroidJavaObject? extraMap = extra == null ? null : ToJavaMap(extra);
 
         AthanaUnityPluginClass.CallStatic("queryAllAccountBind", extraMap);
 
@@ -521,9 +521,10 @@ public class AthanaAndroid : AthanaInterface
             return;
         }
 
-        AndroidJavaObject? extraMap = extra == null ? null : toJavaMap(extra);
+        AndroidJavaObject? extraMap = extra == null ? null : ToJavaMap(extra);
 
         AthanaUnityPluginClass.CallStatic("purchase", product.key, product.subsInex, clientOrderId, consumable, extraMap);
+        extraMap?.Dispose();
     }
 
     /// <summary>
@@ -557,7 +558,7 @@ public class AthanaAndroid : AthanaInterface
             return;
         }
 
-        AndroidJavaObject? extraMap = extra == null ? null : toJavaMap(extra);
+        AndroidJavaObject? extraMap = extra == null ? null : ToJavaMap(extra);
 
         AthanaUnityPluginClass.CallStatic("verifyOrder", purchase.purchaseId, consumable, extraMap);
         extraMap?.Dispose();
@@ -586,8 +587,9 @@ public class AthanaAndroid : AthanaInterface
     public static void SendEvent(string key, string type = "game", Dictionary<string, object>? paramMap = null)
     {
         AthanaLogger.D($"Calling SendEvent {key}");
-        var paramsJavaObj = paramMap == null ? null : toJavaMap(paramMap);
+        var paramsJavaObj = paramMap == null ? null : ToJavaMap(paramMap);
         AthanaUnityPluginClass.CallStatic("sendEvent", key, type, paramsJavaObj);
+        paramsJavaObj?.Dispose();
     }
 
     /// <summary>
@@ -598,8 +600,9 @@ public class AthanaAndroid : AthanaInterface
     public static void UpdateUserInfo(long customUserId, Dictionary<string, object>? extra = null)
     {
         AthanaLogger.D($"Calling UpdateUserInfo");
-        var paramsJavaObj = extra == null ? null : toJavaMap(extra);
+        var paramsJavaObj = extra == null ? null : ToJavaMap(extra);
         AthanaUnityPluginClass.CallStatic("updateUserInfo", customUserId, paramsJavaObj);
+        paramsJavaObj?.Dispose();
     }
 
     /// <summary>
@@ -628,9 +631,12 @@ public class AthanaAndroid : AthanaInterface
         AthanaUnityPluginClass.CallStatic("openStoreDetail");
     }
 
-    private static AndroidJavaObject? toJavaMap(Dictionary<string, object> extra)
+    private static AndroidJavaObject? ToJavaMap(Dictionary<string, object>? extra)
     {
-
+        if (extra == null || extra.Count == 0)
+        {
+            return null;
+        }
         AndroidJavaObject extraMap = new AndroidJavaObject("java.util.HashMap");
         foreach (var item in extra)
         {

@@ -1,6 +1,13 @@
 Athana Unity Plugin Change Log
 
 **************
+Version 1.4.2
+**************
+
+- Fixed an exception that occurred when calling SendEvent with paramMap = null.
+
+
+**************
 Version 1.4.1
 **************
 
