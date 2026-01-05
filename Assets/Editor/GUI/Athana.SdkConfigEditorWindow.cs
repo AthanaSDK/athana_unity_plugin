@@ -91,24 +91,14 @@ class SdkConfigEditorWindow : EditorWindow
         {
             var androidSdkVer = SdkConfig.AndroidDepsVersion.Replace("-SNAPSHOT", "");
             var verArray = androidSdkVer.Split('.');
-            if (verArray.Length != 3)
+            if (!SdkConfig.CheckAndroidVersion())
             {
-                ShowNotification(new GUIContent("版本号填写错误"));
-            } 
+                ShowNotification(new GUIContent($"请设置为 {SdkConfigData.miniAndroidSdkVersion} 或以上的版本"));
+            }
             else
             {
-                var majorVer = int.Parse(verArray[0]);
-                var minorVer = int.Parse(verArray[1]);
-                var patchVer = int.Parse(verArray[2]);
-
-                if (majorVer > 1 || minorVer > 3)
-                {
-                    SdkConfig.Save();
-                    ShowNotification(new GUIContent("保存成功"));
-                } else
-                {
-                    ShowNotification(new GUIContent("请设置为 1.4.1 或以上的版本"));
-                }
+                SdkConfig.Save();
+                ShowNotification(new GUIContent("保存成功"));
             }
         }
 

@@ -55,22 +55,9 @@ class AndroidDepsInjection : AndroidProjectFilesModifier
 
     public override void OnModifyAndroidProjectFiles(AndroidProjectFiles projectFiles)
     {
-        var androidSdkVer = SdkConfig.AndroidDepsVersion.Replace("-SNAPSHOT", "");
-        var verArray = androidSdkVer.Split('.');
-        if (verArray.Length != 3)
+        if (!SdkConfig.CheckAndroidVersion())
         {
-            throw new Exception("Sdk Version is error");
-        }
-        else
-        {
-            var majorVer = int.Parse(verArray[0]);
-            var minorVer = int.Parse(verArray[1]);
-            var patchVer = int.Parse(verArray[2]);
-
-            if (majorVer <= 1 && minorVer < 4)
-            {
-                throw new Exception("SDK 版本过低，请升级至 1.4.1 或更高版本");
-            }
+            throw new Exception("SDK 版本过低，请升级至 1.4.3 或更高版本");
         }
 
         List<string> Components = Transfor(SdkConfig);
@@ -80,7 +67,7 @@ class AndroidDepsInjection : AndroidProjectFilesModifier
         // ----- Plugins
         if (SdkConfig.ImportConversionFirebase() || SdkConfig.ImportPushFirebase())
         {
-            
+
             // 如果需要投放至 Google Ads，则需要添加 Google-Services 和 Firebase 插件
             CustomGradleFile.ApplyPluginList.AddPluginByName("com.google.gms.google-services");
             CustomGradleFile.ApplyPluginList.AddPluginByName("com.google.firebase.crashlytics");
@@ -100,7 +87,7 @@ class AndroidDepsInjection : AndroidProjectFilesModifier
         {
             var DefaultConfig = CustomGradleFile.Android.DefaultConfig;
             DefaultConfig.AddElement(new Element($"resValue \"string\", \"gpg_project_id\", \"{SdkConfig.GooglePlayGamesProjectId}\""));
-            
+
 
             DefaultConfig.AddElement(new Element($"manifestPlaceholders += [FB_LABEL: \"@string/app_name\"]"));
             DefaultConfig.AddElement(new Element($"manifestPlaceholders += [FB_SCHEME: \"@string/facebook_scheme\"]"));

@@ -602,6 +602,32 @@ public class AthanaAndroid : AthanaInterface
         AthanaUnityPluginClass.CallStatic("updateUserInfo", customUserId, paramsJavaObj);
     }
 
+    /// <summary>
+    /// 获取应用语言
+    /// </summary>
+    /// <returns>如未设置可能返回 null </returns>
+    public static String? GetAppLanguage()
+    {
+        return AthanaUnityPluginClass.CallStatic<String?>("getAppLanguage");
+    }
+
+    /// <summary>
+    /// 获取系统语言
+    /// </summary>
+    /// <returns>返回系统层级设置的语言</returns>
+    public static String GetSysLanguage()
+    {
+        return AthanaUnityPluginClass.CallStatic<String>("getSysLanguage");
+    }
+
+    /// <summary>
+    /// 跳转到应用商店详情页
+    /// </summary>
+    public static void OpenStoreDetail()
+    {
+        AthanaUnityPluginClass.CallStatic("openStoreDetail");
+    }
+
     private static AndroidJavaObject? toJavaMap(Dictionary<string, object> extra)
     {
 

@@ -11,6 +11,8 @@ public class SdkConfigData
 {
     private static string configPath = Path.Combine(Application.dataPath, "Plugins", "Android", "athana-sdk-config.json");
 
+    public static string miniAndroidSdkVersion = "1.4.3";
+
     public bool AdServiceEnabled = false;
     public bool AdMaxEnabled = false;
 
@@ -29,7 +31,7 @@ public class SdkConfigData
     public string FacebookAppId = "";
     public string FacebookClientToken = "";
 
-    public string AndroidDepsVersion = "1.4.0";
+    public string AndroidDepsVersion = miniAndroidSdkVersion;
 
     public static SdkConfigData ReadForFile()
     {
@@ -85,6 +87,53 @@ public class SdkConfigData
     public bool ImportPushFirebase()
     {
         return PushServiceEnabled && PushFirebaseEnabled;
+    }
+
+    public bool CheckAndroidVersion()
+    {
+        var androidSdkVer = AndroidDepsVersion.Replace("-SNAPSHOT", "");
+        var verArray = convertVer(androidSdkVer);
+        if (verArray == null)
+        {
+            return false;
+        }
+        var miniVerArray = convertVer(miniAndroidSdkVersion);
+
+        var miniMajorVer = miniVerArray[0];
+        var miniMinorVer = miniVerArray[1];
+        var miniPatchVer = miniVerArray[2];
+        var majorVer = verArray[0];
+        var minorVer = verArray[1];
+        var patchVer = verArray[2];
+
+        var checkResult = false;
+        if (majorVer > miniMajorVer)
+        {
+            checkResult = true;
+        }
+        else if (majorVer == miniMajorVer && minorVer > miniMinorVer)
+        {
+            checkResult = true;
+        }
+        else if (majorVer == miniMajorVer && minorVer == miniMinorVer && patchVer >= miniPatchVer)
+        {
+            checkResult = true;
+        }
+
+        return checkResult;
+    }
+
+    private int[]? convertVer(String verString)
+    {
+        var verArray = verString.Split('.');
+        if (verArray.Length != 3)
+        {
+            return null;
+        }
+        var majorVer = int.Parse(verArray[0]);
+        var minorVer = int.Parse(verArray[1]);
+        var patchVer = int.Parse(verArray[2]);
+        return new int[] { majorVer, minorVer, patchVer };
     }
 
     public override bool Equals(object obj)

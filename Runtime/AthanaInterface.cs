@@ -125,6 +125,11 @@ namespace Athana.Api
         public class TriAccountBindMap
         {
             /// <summary>
+            /// 游客绑定状态，如未绑定则为 null
+            /// </summary>
+            public TriAccount? Tourist;
+
+            /// <summary>
             /// Facebook 绑定状态，如未绑定则为 null
             /// </summary>
             public TriAccount? Facebook;
@@ -165,6 +170,16 @@ namespace Athana.Api
             /// OpenID
             /// </summary>
             public string open_id;
+
+            /// <summary>
+            /// 绑定时间（10位时间戳）
+            /// </summary>
+            public int bing_time;
+
+            /// <summary>
+            /// 主从关系（master/slave）
+            /// </summary>
+            public string role;
         }
 
         /// <summary>

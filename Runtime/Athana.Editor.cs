@@ -342,4 +342,32 @@ public class AthanaUnityEditor : AthanaInterface
     {
         AthanaLogger.D($"Calling UpdateUserInfo on Unity Editor");
     }
+
+    /// <summary>
+    /// 获取应用语言
+    /// </summary>
+    /// <returns>如未设置可能返回 null </returns>
+    public static String? GetAppLanguage()
+    {
+        AthanaLogger.D($"Calling GetAppLanguage on Unity Editor");
+        return null;
+    }
+
+    /// <summary>
+    /// 获取系统语言
+    /// </summary>
+    /// <returns>返回系统层级设置的语言</returns>
+    public static String GetSysLanguage()
+    {
+        AthanaLogger.D($"Calling GetSysLanguage on Unity Editor");
+        return "en";
+    }
+
+    /// <summary>
+    /// 跳转至商店详情页
+    /// </summary>
+    public static void OpenStoreDetail()
+    {
+        AthanaLogger.D($"Calling OpenStoreDetail on Unity Editor");
+    }
 }

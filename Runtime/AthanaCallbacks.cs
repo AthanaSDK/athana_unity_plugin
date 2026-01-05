@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Athana.Api;
 using Newtonsoft.Json;
 
@@ -239,7 +238,7 @@ namespace Athana.Callbacks
             public T? data { get; private set; }
             public AthanaInterface.SdkError? error { get; private set; }
 
-            public SdkCallback(T? data, AthanaInterface.SdkError? error = null)
+            public SdkCallback(T? data = default(T), AthanaInterface.SdkError? error = null)
             {
                 this.data = data;
                 this.error = error;
@@ -534,9 +533,17 @@ namespace Athana.Callbacks
             }
             else
             {
-                T? data = JsonConvert.DeserializeObject<T>(dataJson);
-                var paramData = new SdkCallback<T>(data);
-                InvokeEvent(act, paramData, funcName);
+                if (dataJson == null)
+                {
+                    var paramData = new SdkCallback<T>();
+                    InvokeEvent(act, paramData, funcName);
+                }
+                else
+                {
+                    T? data = JsonConvert.DeserializeObject<T>(dataJson);
+                    var paramData = new SdkCallback<T>(data);
+                    InvokeEvent(act, paramData, funcName);
+                }
             }
         }
 
