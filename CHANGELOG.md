@@ -1,6 +1,13 @@
 Athana Unity Plugin Change Log
 
 **************
+Version 1.4.3
+**************
+
+- Fixed issues.
+
+
+**************
 Version 1.4.2
 **************
 

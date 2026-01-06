@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
 using Athana.Api;
 using Athana.Callbacks;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 #if UNITY_ANDROID
 
@@ -145,16 +145,17 @@ public class AthanaAndroid : AthanaInterface
             return;
         }
         AndroidJavaObject? extraMap = extra == null ? null : ToJavaMap(extra);
-
+        AndroidJavaObject? customUserIdAJObj = customUserId == null ? null : new AndroidJavaObject("java.lang.Long", customUserId);
         try
         {
-            AthanaUnityPluginClass.CallStatic("registryUser", (int)signInType, ua, deviceId, customUserId, extraMap);
+            AthanaUnityPluginClass.CallStatic("registryUser", (int)signInType, ua, deviceId, customUserIdAJObj, extraMap);
         }
         catch (Exception e)
         {
             AthanaLogger.W("Failed to call registryUser");
             AthanaLogger.LogException(e);
         }
+        customUserIdAJObj?.Dispose();
         extraMap?.Dispose();
     }
 
@@ -180,9 +181,11 @@ public class AthanaAndroid : AthanaInterface
         }
 
         AndroidJavaObject? extraMap = extra == null ? null : ToJavaMap(extra);
+        AndroidJavaObject? customUserIdAJObj = customUserId == null ? null : new AndroidJavaObject("java.lang.Long", customUserId);
 
-        AthanaUnityPluginClass.CallStatic("signIn", (int)signInType, ua, deviceId, customUserId, extraMap);
+        AthanaUnityPluginClass.CallStatic("signIn", (int)signInType, ua, deviceId, customUserIdAJObj, extraMap);
 
+        customUserIdAJObj?.Dispose();
         extraMap?.Dispose();
     }
 
@@ -221,7 +224,11 @@ public class AthanaAndroid : AthanaInterface
         {
             enabledTypes = null;
         }
-        AthanaUnityPluginClass.CallStatic("signInWithUI", enabledTypes, customUserId, privacyPolicyUrl, termsOfServiceUrl);
+        AndroidJavaObject? customUserIdAJObj = customUserId == null ? null : new AndroidJavaObject("java.lang.Long", customUserId);
+
+        AthanaUnityPluginClass.CallStatic("signInWithUI", enabledTypes, customUserIdAJObj, privacyPolicyUrl, termsOfServiceUrl);
+
+        customUserIdAJObj?.Dispose();
         enabledTypes?.Dispose();
     }
 
@@ -521,10 +528,15 @@ public class AthanaAndroid : AthanaInterface
             return;
         }
 
-        AndroidJavaObject? extraMap = extra == null ? null : ToJavaMap(extra);
+        var subsInexAJObj = new AndroidJavaObject("java.lang.Integer", product.subsInex);
+        AndroidJavaObject? clientOrderIdAJObj = clientOrderId == null ? null : new AndroidJavaObject("java.lang.Long", clientOrderId);
+        var extraAJObj = extra == null ? null : ToJavaMap(extra);
+        
+        AthanaUnityPluginClass.CallStatic("purchase", product.key, subsInexAJObj, clientOrderIdAJObj, consumable, extraAJObj);
 
-        AthanaUnityPluginClass.CallStatic("purchase", product.key, product.subsInex, clientOrderId, consumable, extraMap);
-        extraMap?.Dispose();
+        subsInexAJObj.Dispose();
+        clientOrderIdAJObj?.Dispose();
+        extraAJObj?.Dispose();
     }
 
     /// <summary>
