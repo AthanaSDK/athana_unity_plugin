@@ -364,6 +364,16 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
+    /// 获取系统国家地区代码
+    /// </summary>
+    /// <returns>返回系统层级设置的国家地区</returns>
+    public static String GetSysCountry()
+    {
+        AthanaLogger.D($"Calling GetSysCountry on Unity Editor");
+        return "US";
+    }
+
+    /// <summary>
     /// 跳转至商店详情页
     /// </summary>
     public static void OpenStoreDetail()
