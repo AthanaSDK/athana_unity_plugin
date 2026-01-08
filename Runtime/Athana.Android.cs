@@ -636,6 +636,15 @@ public class AthanaAndroid : AthanaInterface
     }
 
     /// <summary>
+    /// 获取系统国家地区代码
+    /// </summary>
+    /// <returns>返回系统层级设置的国家地区</returns>
+    public static String GetSysCountry()
+    {
+        return AthanaUnityPluginClass.CallStatic<String>("getSysCountry");
+    }
+
+    /// <summary>
     /// 跳转到应用商店详情页
     /// </summary>
     public static void OpenStoreDetail()

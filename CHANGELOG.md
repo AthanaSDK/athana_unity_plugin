@@ -1,6 +1,13 @@
 Athana Unity Plugin Change Log
 
 **************
+Version 1.4.4
+**************
+
+- Add AthanaSdk tool function.
+
+
+**************
 Version 1.4.3
 **************
 
