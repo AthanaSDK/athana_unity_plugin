@@ -1,10 +1,11 @@
 Athana Unity Plugin Change Log
 
 **************
-Version 1.4.5
+Version 1.4.6
 **************
 
 - Fixed SignInType enum value.
+
 
 **************
 Version 1.4.4
