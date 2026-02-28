@@ -24,27 +24,32 @@ namespace Athana.Api
             /// <summary>
             /// 游客
             /// </summary>
-            ANONYMOUS,
-
-            /// <summary>
-            /// Google 账户
-            /// </summary>
-            GOOGLE,
+            ANONYMOUS = 0,
 
             /// <summary>
             /// Facebook 账户
             /// </summary>
-            FACEBOOK,
+            FACEBOOK = 1,
+
+            /// <summary>
+            /// Apple 账户
+            /// </summary>
+            APPLE = 2,
+
+            /// <summary>
+            /// Google 账户
+            /// </summary>
+            GOOGLE = 3,
 
             /// <summary>
             /// Google Play 游戏登录
             /// </summary>
-            GOOGLE_PLAY_GAMES,
+            GOOGLE_PLAY_GAMES = 6,
 
             /// <summary>
             /// 自校验登录
             /// </summary>
-            BY_CLIENT_SELF
+            BY_CLIENT_SELF = 7
         }
 
         /// <summary>
