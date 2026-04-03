@@ -19,7 +19,7 @@ class AndroidDepsInjection : AndroidProjectFilesModifier
 
     public override AndroidProjectFilesModifierContext Setup()
     {
-        AndroidProjectFilesModifierContext projectFilesContext = new AndroidProjectFilesModifierContext();
+        AndroidProjectFilesModifierContext projectFilesContext = new();
         projectFilesContext.Outputs.AddBuildGradleFile(_sdkDepsOptionBuildGradle);
 
         projectFilesContext.Dependencies.DependencyFiles = new[] {
@@ -57,7 +57,7 @@ class AndroidDepsInjection : AndroidProjectFilesModifier
     {
         if (!SdkConfig.CheckAndroidVersion())
         {
-            throw new Exception("SDK 版本过低，请升级至 1.4.3 或更高版本");
+            throw new Exception($"SDK 版本过低，请升级至 {SdkConfigData.miniAndroidSdkVersion} 或更高版本");
         }
 
         List<string> Components = Transfor(SdkConfig);
@@ -107,6 +107,8 @@ class AndroidDepsInjection : AndroidProjectFilesModifier
                 buildTypeBlock.AddElement(FirebaseCrashlyticsBlock);
             }
         }
+
+        CustomGradleFile.Android.Packaging.AddElement(new Element("resources.excludes.add(\"META-INF/versions/9/OSGI-INF/MANIFEST.MF\")"));
 
         // ----- Dependencies
         Dependencies Dependencies = CustomGradleFile.Dependencies;
@@ -161,6 +163,11 @@ class AndroidDepsInjection : AndroidProjectFilesModifier
         {
             // api("com.inonesdk.athana:push-firebase:${sdkVersion}")
             Components.Add("push-firebase");
+        }
+        if (data.ImportGamingGPGS())
+        {
+            // api("com.inonesdk.athana:gaming-gpgs:${sdkVersion}")
+            Components.Add("gaming-gpgs");
         }
         return Components;
     }

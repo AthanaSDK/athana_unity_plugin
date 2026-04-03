@@ -15,13 +15,15 @@ public class AthanaUnityEditor : AthanaInterface
     /// <param name="serviceConfig">服务配置</param>
     /// <param name="testMode">支付测试模式</param>
     /// <param name="debug">SDK调试模式，默认为 false，设置 true 将在日志中输出调试日志</param>
+    /// <param name="readClipBoard">SDK访问剪贴板（落地页自归因方案），默认为 false，设置 true 将在注册用户时访问剪贴板</param>
     public static void Initialize(
         long appId, 
         string appKey, 
         string appSecret,
         AthanaServiceConfig? serviceConfig = null,
         bool testMode = false, 
-        bool debug = false)
+        bool debug = false,
+        bool readClipBoard = false)
     {
         DebugMode = debug;
         AthanaLogger.D("Calling Init on Unity Editor");
@@ -322,12 +324,40 @@ public class AthanaUnityEditor : AthanaInterface
     }
 
     /// <summary>
+    /// 查询是否已授权发送通知权限
+    /// </summary>
+    /// <param name="callback">回调函数名，用于返回查询结果</param>
+    public static void CheckPostNotificationPermission(Action<bool> callback)
+    {
+        AthanaLogger.D("Calling CheckPostNotificationPermission on Unity Editor");
+        callback(false);
+    }
+
+    /// <summary>
+    /// 请求发送通知权限
+    /// <summary>
+    public static void RequestPostNotificationPermission()
+    {
+        AthanaLogger.D("Calling RequestPostNotificationPermission on Unity Editor");
+    }
+
+    /// <summary>
     /// 发送事件
     /// </summary>
     /// <param name="key">事件名</param>
     /// <param name="type">事件类型，默认为 game</param>
     /// <param name="paramMap">事件参数</param>
-    public static void SendEvent(string key, string type = "game", Dictionary<string, object>? paramMap = null)
+    /// <param name="targets">事件发送渠道，默认 null 为所有，可以指定发送到哪些渠道，例如 ["platform", "firebase"]。
+    /// <list type="bullet">
+    ///   <item>
+    ///     <description>platform: 平台事件</description>
+    ///   </item>
+    ///   <item>
+    ///     <description>firebase: Firebase Analytics 事件</description>
+    ///   </item>
+    /// </list>
+    /// </param>
+    public static void SendEvent(string key, string type = "game", Dictionary<string, object>? paramMap = null, List<string>? targets = null)
     {
 
         AthanaLogger.D("Calling SendEvent on Unity Editor");
@@ -380,4 +410,158 @@ public class AthanaUnityEditor : AthanaInterface
     {
         AthanaLogger.D($"Calling OpenStoreDetail on Unity Editor");
     }
+
+    #region Gaming Service APIs
+
+    /// <summary>
+    /// 提交分数到排行榜
+    /// </summary>
+    /// <param name="leaderboardId">排行榜 ID</param>
+    /// <param name="score">分数</param>
+    /// <param name="extra">额外信息</param>
+    /// <param name="immediate">false 为异步提交，true 为实时提交。设置为 true 才会在监听收到回调</param>
+    public static void SubmitScore(string leaderboardId, long score, string? extra = null, bool immediate = false)
+    {
+        AthanaLogger.D($"Calling SubmitScore on Unity Editor");
+    }
+
+    /// <summary>
+    /// 获取玩家分数
+    /// </summary>
+    /// <param name="leaderboardId">排行榜 ID</param>
+    /// <param name="scope">玩家范围</param>
+    /// <param name="timeScope">时间范围</param>
+    public static void GetScore(string leaderboardId, LeaderboardPlayerScope scope, LeaderboardTimeSpan timeScope)
+    {
+        AthanaLogger.D($"Calling GetScore on Unity Editor");
+    }
+
+    /// <summary>
+    /// 打开排行榜 UI
+    /// </summary>
+    /// <param name="leaderboardId">排行榜 ID，为空时显示所有排行榜</param>
+    /// <param name="scope">玩家范围</param>
+    /// <param name="timeScope">时间范围</param>
+    public static void OpenLeaderboardUI(string? leaderboardId = null, LeaderboardPlayerScope? scope = null, LeaderboardTimeSpan? timeScope = null)
+    {
+        AthanaLogger.D($"Calling OpenLeaderboardUI on Unity Editor");
+    }
+
+    /// <summary>
+    /// 获取排行榜信息
+    /// </summary>
+    /// <param name="leaderboardId">排行榜 ID，为空时获取所有排行榜信息</param>
+    /// <param name="forceReload">是否强制刷新</param>
+    public static void GetLeaderboardInfo(string? leaderboardId = null, bool forceReload = false)
+    {
+        AthanaLogger.D($"Calling GetLeaderboardInfo on Unity Editor");
+    }
+
+    /// <summary>
+    /// 加载排行榜数据
+    /// </summary>
+    /// <param name="leaderboardId">排行榜 ID</param>
+    /// <param name="scope">玩家范围</param>
+    /// <param name="timeScope">时间范围</param>
+    /// <param name="pageSize">每页数量</param>
+    /// <param name="userCenter">是否以当前用户为中心</param>
+    public static void LoadLeaderboardData(string leaderboardId, LeaderboardPlayerScope scope, LeaderboardTimeSpan timeScope, int pageSize, bool userCenter = false)
+    {
+        AthanaLogger.D($"Calling LoadLeaderboardData on Unity Editor");
+    }
+
+    /// <summary>
+    /// 加载更多排行榜数据
+    /// </summary>
+    /// <param name="leaderboardId">排行榜 ID</param>
+    /// <param name="pageSize">每页数量</param>
+    /// <param name="pageDirection">分页方向</param>
+    public static void LoadMoreLeaderboardData(string leaderboardId, int pageSize, PageDirection pageDirection)
+    {
+        AthanaLogger.D($"Calling LoadMoreLeaderboardData on Unity Editor");
+    }
+
+    /// <summary>
+    /// 释放排行榜数据资源
+    /// </summary>
+    public static void LeaderboardDataRelease()
+    {
+        AthanaLogger.D($"Calling LeaderboardDataRelease on Unity Editor");
+    }
+
+    /// <summary>
+    /// 解锁成就
+    /// </summary>
+    /// <param name="achievementId">成就 ID</param>
+    /// <param name="immediate">false 为异步提交，true 为实时提交。设置为 true 才会在监听收到回调</param>
+    public static void UnlockAchievement(string achievementId, bool immediate = false)
+    {
+        AthanaLogger.D($"Calling UnlockAchievement on Unity Editor");
+    }
+
+    /// <summary>
+    /// 更新成就进度
+    /// </summary>
+    /// <param name="achievementId">成就 ID</param>
+    /// <param name="progress">进度值（0-100）</param>
+    /// <param name="immediate">false 为异步提交，true 为实时提交。设置为 true 才会在监听收到回调</param>
+    public static void UpdateAchievementProgress(string achievementId, int progress, bool immediate = false)
+    {
+        AthanaLogger.D($"Calling UpdateAchievementProgress on Unity Editor");
+    }
+
+    /// <summary>
+    /// 打开成就 UI
+    /// </summary>
+    public static void OpenAchievementUI()
+    {
+        AthanaLogger.D($"Calling OpenAchievementUI on Unity Editor");
+    }
+
+    /// <summary>
+    /// 获取成就数据
+    /// </summary>
+    /// <param name="forceReload">是否强制刷新</param>
+    public static void GetAchievementData(bool forceReload = false)
+    {
+        AthanaLogger.D($"Calling GetAchievementData on Unity Editor");
+    }
+
+    /// <summary>
+    /// 请求好友列表访问权限
+    /// </summary>
+    public static void RequestFriendListPermission()
+    {
+        AthanaLogger.D($"Calling RequestFriendListPermission on Unity Editor");
+    }
+
+    /// <summary>
+    /// 加载好友列表
+    /// </summary>
+    /// <param name="pageSize">每页数量</param>
+    /// <param name="forceReload">是否强制刷新</param>
+    public static void LoadFriends(int pageSize, bool forceReload = false)
+    {
+        AthanaLogger.D($"Calling LoadFriends on Unity Editor");
+    }
+
+    /// <summary>
+    /// 加载更多好友
+    /// </summary>
+    /// <param name="pageSize">每页数量</param>
+    public static void LoadMoreFriends(int pageSize)
+    {
+        AthanaLogger.D($"Calling LoadMoreFriends on Unity Editor");
+    }
+
+    /// <summary>
+    /// 打开玩家资料 UI
+    /// </summary>
+    /// <param name="playerId">玩家 ID</param>
+    public static void OpenPlayerProfileUI(string playerId)
+    {
+        AthanaLogger.D($"Calling OpenPlayerProfileUI on Unity Editor");
+    }
+
+    #endregion
 }

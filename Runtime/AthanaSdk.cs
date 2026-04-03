@@ -10,7 +10,7 @@ public class AthanaSdk :
     AthanaUnityEditor
 #endif
 {
-    private const string _version = "1.2.0";
+    private const string _version = "1.4.5";
 
     /// <summary>
     /// Returns the current plugin version.

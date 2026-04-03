@@ -31,12 +31,20 @@ class SdkConfigEditorWindow : EditorWindow
             wordWrap = true
         };
 
+        GUIStyle scrollStyle = new()
+        {
+            padding = new RectOffset(15, 15, 0, 0)
+        };
+
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.ExpandHeight(true));
+        EditorGUILayout.BeginVertical(scrollStyle);
 
         // ----------------- Deps Version -----------------
         GUILayout.Label("版本配置", EditorStyles.boldLabel);
         GUILayout.Space(10);
         SdkConfig.AndroidDepsVersion = EditorGUILayout.TextField("Android SDK版本", SdkConfig.AndroidDepsVersion);
+        GUILayout.Space(10);
+        SdkConfig.IosDepsVersion = EditorGUILayout.TextField("iOS SDK版本", SdkConfig.IosDepsVersion);
         GUILayout.Space(25);
 
         // ----------------- AD -----------------
@@ -69,6 +77,7 @@ class SdkConfigEditorWindow : EditorWindow
         GUILayout.Space(10);
         SdkConfig.AccountServiceEnabled = EditorGUILayout.BeginToggleGroup("集成三方登录", SdkConfig.AccountServiceEnabled);
         SdkConfig.GooglePlayGamesProjectId = EditorGUILayout.TextField("GP Games ProjectID", SdkConfig.GooglePlayGamesProjectId);
+        SdkConfig.GoogleWebClientId = EditorGUILayout.TextField("Google Web ClientID", SdkConfig.GoogleWebClientId);
         EditorGUILayout.EndToggleGroup();
         GUILayout.Space(25);
 
@@ -81,19 +90,34 @@ class SdkConfigEditorWindow : EditorWindow
         EditorGUILayout.EndToggleGroup();
         GUILayout.Space(25);
 
+        // ----------------- Gaming -----------------
+        GUILayout.Label("游戏中心服务配置", EditorStyles.boldLabel);
+        GUILayout.Space(10);
+        SdkConfig.GamingServiceEnabled = EditorGUILayout.BeginToggleGroup("集成游戏中心", SdkConfig.GamingServiceEnabled);
+        SdkConfig.GamingGPGSEnabled = EditorGUILayout.BeginToggleGroup("Google Play Games (For Android)", SdkConfig.GamingGPGSEnabled);
+        EditorGUILayout.EndToggleGroup();
+        GUILayout.Space(10);
+        SdkConfig.GamingGameCenterEnabled = EditorGUILayout.BeginToggleGroup("Apple Game Center (For iOS)", SdkConfig.GamingGameCenterEnabled);
+        EditorGUILayout.EndToggleGroup();
+        EditorGUILayout.EndToggleGroup();
+        GUILayout.Space(25);
+
         // ----------------- 公共 -----------------
         GUILayout.Label("三方SDK公用配置", EditorStyles.boldLabel);
         SdkConfig.FacebookAppId = EditorGUILayout.TextField("Faacebook AppID", SdkConfig.FacebookAppId);
         SdkConfig.FacebookClientToken = EditorGUILayout.TextField("Facebook ClientToken", SdkConfig.FacebookClientToken);
+        SdkConfig.IosDepsManager = EditorGUILayout.Popup("iOS依赖管理方式", SdkConfig.IosDepsManager, SdkConfigData.iosDepsManagers);
         GUILayout.Space(25);
 
         if (GUILayout.Button("保存"))
         {
-            var androidSdkVer = SdkConfig.AndroidDepsVersion.Replace("-SNAPSHOT", "");
-            var verArray = androidSdkVer.Split('.');
             if (!SdkConfig.CheckAndroidVersion())
             {
                 ShowNotification(new GUIContent($"请设置为 {SdkConfigData.miniAndroidSdkVersion} 或以上的版本"));
+            }
+            else if (!SdkConfig.CheckIOSVersion())
+            {
+                ShowNotification(new GUIContent($"请设置为 {SdkConfigData.miniIOSSdkVersion} 或以上的版本"));
             }
             else
             {
@@ -102,6 +126,7 @@ class SdkConfigEditorWindow : EditorWindow
             }
         }
 
+        EditorGUILayout.EndVertical();
         EditorGUILayout.EndScrollView();
     }
 

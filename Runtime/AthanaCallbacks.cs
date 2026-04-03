@@ -233,6 +233,218 @@ namespace Athana.Callbacks
             }
         }
 
+        #region Gaming Service Callbacks
+
+        private static Action<SdkCallback<object?>> onSubmitScoreResult;
+        /// <summary>
+        /// 提交分数的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<object?>> OnSubmitScoreResult
+        {
+            add
+            {
+                onSubmitScoreResult += value;
+            }
+            remove
+            {
+                onSubmitScoreResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<AthanaInterface.ScoreData>> onGetScoreResult;
+        /// <summary>
+        /// 获取玩家分数的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<AthanaInterface.ScoreData>> OnGetScoreResult
+        {
+            add
+            {
+                onGetScoreResult += value;
+            }
+            remove
+            {
+                onGetScoreResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<object?>> onOpenLeaderboardUIResult;
+        /// <summary>
+        /// 打开排行榜UI的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<object?>> OnOpenLeaderboardUIResult
+        {
+            add
+            {
+                onOpenLeaderboardUIResult += value;
+            }
+            remove
+            {
+                onOpenLeaderboardUIResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<List<AthanaInterface.LeaderboardInfo>>> onGetLeaderboardInfoResult;
+        /// <summary>
+        /// 获取排行榜信息的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<List<AthanaInterface.LeaderboardInfo>>> OnGetLeaderboardInfoResult
+        {
+            add
+            {
+                onGetLeaderboardInfoResult += value;
+            }
+            remove
+            {
+                onGetLeaderboardInfoResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<AthanaInterface.ScoreList>> onLoadLeaderboardDataResult;
+        /// <summary>
+        /// 加载排行榜数据的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<AthanaInterface.ScoreList>> OnLoadLeaderboardDataResult
+        {
+            add
+            {
+                onLoadLeaderboardDataResult += value;
+            }
+            remove
+            {
+                onLoadLeaderboardDataResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<AthanaInterface.ScoreList>> onLoadMoreLeaderboardDataResult;
+        /// <summary>
+        /// 加载更多排行榜数据的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<AthanaInterface.ScoreList>> OnLoadMoreLeaderboardDataResult
+        {
+            add
+            {
+                onLoadMoreLeaderboardDataResult += value;
+            }
+            remove
+            {
+                onLoadMoreLeaderboardDataResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<object?>> onUnlockAchievementResult;
+        /// <summary>
+        /// 解锁成就的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<object?>> OnUnlockAchievementResult
+        {
+            add
+            {
+                onUnlockAchievementResult += value;
+            }
+            remove
+            {
+                onUnlockAchievementResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<object?>> onUpdateAchievementProgressResult;
+        /// <summary>
+        /// 更新成就进度的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<object?>> OnUpdateAchievementProgressResult
+        {
+            add
+            {
+                onUpdateAchievementProgressResult += value;
+            }
+            remove
+            {
+                onUpdateAchievementProgressResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<object?>> onOpenAchievementUIResult;
+        /// <summary>
+        /// 打开成就UI的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<object?>> OnOpenAchievementUIResult
+        {
+            add
+            {
+                onOpenAchievementUIResult += value;
+            }
+            remove
+            {
+                onOpenAchievementUIResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<List<AthanaInterface.Achievement>>> onGetAchievementDataResult;
+        /// <summary>
+        /// 获取成就数据的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<List<AthanaInterface.Achievement>>> OnGetAchievementDataResult
+        {
+            add
+            {
+                onGetAchievementDataResult += value;
+            }
+            remove
+            {
+                onGetAchievementDataResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<object?>> onRequestFriendListPermissionResult;
+        /// <summary>
+        /// 请求好友列表访问权限的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<object?>> OnRequestFriendListPermissionResult
+        {
+            add
+            {
+                onRequestFriendListPermissionResult += value;
+            }
+            remove
+            {
+                onRequestFriendListPermissionResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<AthanaInterface.FriendList>> onLoadFriendsResult;
+        /// <summary>
+        /// 加载好友列表的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<AthanaInterface.FriendList>> OnLoadFriendsResult
+        {
+            add
+            {
+                onLoadFriendsResult += value;
+            }
+            remove
+            {
+                onLoadFriendsResult -= value;
+            }
+        }
+
+        private static Action<SdkCallback<AthanaInterface.FriendList>> onLoadMoreFriendsResult;
+        /// <summary>
+        /// 加载更多好友的回调监听
+        /// </summary>
+        public static event Action<SdkCallback<AthanaInterface.FriendList>> OnLoadMoreFriendsResult
+        {
+            add
+            {
+                onLoadMoreFriendsResult += value;
+            }
+            remove
+            {
+                onLoadMoreFriendsResult -= value;
+            }
+        }
+
+        #endregion
+
         public class SdkCallback<T>
         {
             public T? data { get; private set; }
@@ -322,6 +534,60 @@ namespace Athana.Callbacks
             {
                 invokeNoResultObj(errorJson, funcName, onUpdateUserInfoResult);
             }
+            #region Gaming Service Events
+            else if (funcName == "onSubmitScoreResult")
+            {
+                invokeNoResultObj(errorJson, funcName, onSubmitScoreResult);
+            }
+            else if (funcName == "onGetScoreResult")
+            {
+                invoke(dataJson, errorJson, funcName, onGetScoreResult);
+            }
+            else if (funcName == "onOpenLeaderboardUIResult")
+            {
+                invokeNoResultObj(errorJson, funcName, onOpenLeaderboardUIResult);
+            }
+            else if (funcName == "onGetLeaderboardInfoResult")
+            {
+                invokeFromList(dataJson, errorJson, funcName, onGetLeaderboardInfoResult);
+            }
+            else if (funcName == "onLoadLeaderboardDataResult")
+            {
+                invoke(dataJson, errorJson, funcName, onLoadLeaderboardDataResult);
+            }
+            else if (funcName == "onLoadMoreLeaderboardDataResult")
+            {
+                invoke(dataJson, errorJson, funcName, onLoadMoreLeaderboardDataResult);
+            }
+            else if (funcName == "onUnlockAchievementResult")
+            {
+                invokeNoResultObj(errorJson, funcName, onUnlockAchievementResult);
+            }
+            else if (funcName == "onUpdateAchievementProgressResult")
+            {
+                invokeNoResultObj(errorJson, funcName, onUpdateAchievementProgressResult);
+            }
+            else if (funcName == "onOpenAchievementUIResult")
+            {
+                invokeNoResultObj(errorJson, funcName, onOpenAchievementUIResult);
+            }
+            else if (funcName == "onGetAchievementDataResult")
+            {
+                invokeFromList(dataJson, errorJson, funcName, onGetAchievementDataResult);
+            }
+            else if (funcName == "onRequestFriendListPermissionResult")
+            {
+                invokeNoResultObj(errorJson, funcName, onRequestFriendListPermissionResult);
+            }
+            else if (funcName == "onLoadFriendsResult")
+            {
+                invoke(dataJson, errorJson, funcName, onLoadFriendsResult);
+            }
+            else if (funcName == "onLoadMoreFriendsResult")
+            {
+                invoke(dataJson, errorJson, funcName, onLoadMoreFriendsResult);
+            }
+            #endregion
             else
             {
                 AthanaLogger.D("Function not found on this event result");

@@ -9,9 +9,29 @@ using UnityEngine;
 [Serializable]
 public class SdkConfigData
 {
-    private static string configPath = Path.Combine(Application.dataPath, "Plugins", "Android", "athana-sdk-config.json");
 
-    public static string miniAndroidSdkVersion = "1.4.3";
+    private static string newConfigPath = Path.Combine(Application.dataPath, "Plugins", "athana-sdk-config.json");
+
+    private static string oldConfigPath = Path.Combine(Application.dataPath, "Plugins", "Android", "athana-sdk-config.json");
+
+    private static string configPath
+    {
+        get
+        {
+            if (File.Exists(newConfigPath))
+            {
+                return newConfigPath;
+            }
+            else
+            {
+                return oldConfigPath;
+            }
+        }
+    }
+
+    public static string miniAndroidSdkVersion = "1.5.1";
+    public static string miniIOSSdkVersion = "1.1.0";
+    public static string[] iosDepsManagers = new string[] { "SwiftPM", "CocoaPods" };
 
     public bool AdServiceEnabled = false;
     public bool AdMaxEnabled = false;
@@ -23,15 +43,24 @@ public class SdkConfigData
 
     public bool AccountServiceEnabled = false;
     public string GooglePlayGamesProjectId = "";
+    public string GoogleWebClientId = "";
 
     public bool PushServiceEnabled = false;
     public bool PushFirebaseEnabled = false;
+
+    public bool GamingServiceEnabled = false;
+    public bool GamingGPGSEnabled = false;
+    public bool GamingGameCenterEnabled = false;
 
     // -------- 通用
     public string FacebookAppId = "";
     public string FacebookClientToken = "";
 
     public string AndroidDepsVersion = miniAndroidSdkVersion;
+
+    public string IosDepsVersion = miniIOSSdkVersion;
+
+    public int IosDepsManager = 0; // 0: SwiftPM, 1: CocoaPods
 
     public static SdkConfigData ReadForFile()
     {
@@ -89,6 +118,16 @@ public class SdkConfigData
         return PushServiceEnabled && PushFirebaseEnabled;
     }
 
+    public bool ImportGamingGPGS()
+    {
+        return GamingServiceEnabled && GamingGPGSEnabled;
+    }
+
+    public bool ImportGamingGameCenter()
+    {
+        return GamingServiceEnabled && GamingGameCenterEnabled;
+    }
+
     public bool CheckAndroidVersion()
     {
         var androidSdkVer = AndroidDepsVersion.Replace("-SNAPSHOT", "");
@@ -98,6 +137,48 @@ public class SdkConfigData
             return false;
         }
         var miniVerArray = convertVer(miniAndroidSdkVersion);
+        if (miniVerArray == null)
+        {
+            return false;
+        }
+
+        var miniMajorVer = miniVerArray[0];
+        var miniMinorVer = miniVerArray[1];
+        var miniPatchVer = miniVerArray[2];
+        var majorVer = verArray[0];
+        var minorVer = verArray[1];
+        var patchVer = verArray[2];
+
+        var checkResult = false;
+        if (majorVer > miniMajorVer)
+        {
+            checkResult = true;
+        }
+        else if (majorVer == miniMajorVer && minorVer > miniMinorVer)
+        {
+            checkResult = true;
+        }
+        else if (majorVer == miniMajorVer && minorVer == miniMinorVer && patchVer >= miniPatchVer)
+        {
+            checkResult = true;
+        }
+
+        return checkResult;
+    }
+
+    public bool CheckIOSVersion()
+    {
+        var iosSdkVer = IosDepsVersion.Replace("-SNAPSHOT", "");
+        var verArray = convertVer(iosSdkVer);
+        if (verArray == null)
+        {
+            return false;
+        }
+        var miniVerArray = convertVer(miniIOSSdkVersion);
+        if (miniVerArray == null)
+        {
+            return false;
+        }
 
         var miniMajorVer = miniVerArray[0];
         var miniMinorVer = miniVerArray[1];
@@ -136,10 +217,15 @@ public class SdkConfigData
         return new int[] { majorVer, minorVer, patchVer };
     }
 
+    // override object.Equals
     public override bool Equals(object obj)
     {
-        return obj is SdkConfigData data &&
-               AdServiceEnabled == data.AdServiceEnabled &&
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+        SdkConfigData data = (SdkConfigData)obj;
+        return AdServiceEnabled == data.AdServiceEnabled &&
                AdMaxEnabled == data.AdMaxEnabled &&
                ConversionServiceEnabled == data.ConversionServiceEnabled &&
                ConversionAppsFlyerEnabled == data.ConversionAppsFlyerEnabled &&
@@ -147,16 +233,23 @@ public class SdkConfigData
                ConversionFirebaseEnabled == data.ConversionFirebaseEnabled &&
                AccountServiceEnabled == data.AccountServiceEnabled &&
                GooglePlayGamesProjectId == data.GooglePlayGamesProjectId &&
+               GoogleWebClientId == data.GoogleWebClientId &&
                PushServiceEnabled == data.PushServiceEnabled &&
                PushFirebaseEnabled == data.PushFirebaseEnabled &&
+               GamingServiceEnabled == data.GamingServiceEnabled &&
+               GamingGPGSEnabled == data.GamingGPGSEnabled &&
+               GamingGameCenterEnabled == data.GamingGameCenterEnabled &&
                FacebookAppId == data.FacebookAppId &&
                FacebookClientToken == data.FacebookClientToken &&
-               AndroidDepsVersion == data.AndroidDepsVersion;
+               AndroidDepsVersion == data.AndroidDepsVersion &&
+               IosDepsVersion == data.IosDepsVersion &&
+               IosDepsManager == data.IosDepsManager;
     }
-
+    
+    // override object.GetHashCode
     public override int GetHashCode()
     {
-        HashCode hash = new HashCode();
+        HashCode hash = new();
         hash.Add(AdServiceEnabled);
         hash.Add(AdMaxEnabled);
         hash.Add(ConversionServiceEnabled);
@@ -165,11 +258,17 @@ public class SdkConfigData
         hash.Add(ConversionFirebaseEnabled);
         hash.Add(AccountServiceEnabled);
         hash.Add(GooglePlayGamesProjectId);
+        hash.Add(GoogleWebClientId);
         hash.Add(PushServiceEnabled);
         hash.Add(PushFirebaseEnabled);
+        hash.Add(GamingServiceEnabled);
+        hash.Add(GamingGPGSEnabled);
+        hash.Add(GamingGameCenterEnabled);
         hash.Add(FacebookAppId);
         hash.Add(FacebookClientToken);
         hash.Add(AndroidDepsVersion);
+        hash.Add(IosDepsVersion);
+        hash.Add(IosDepsManager);
         return hash.ToHashCode();
     }
 

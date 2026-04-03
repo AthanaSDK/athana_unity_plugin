@@ -24,32 +24,32 @@ namespace Athana.Api
             /// <summary>
             /// 游客
             /// </summary>
-            ANONYMOUS,
+            ANONYMOUS = 0,
 
             /// <summary>
             /// Google 账户
             /// </summary>
-            GOOGLE,
+            GOOGLE = 3,
 
             /// <summary>
             /// Facebook 账户
             /// </summary>
-            FACEBOOK,
+            FACEBOOK = 1,
 
             /// <summary>
             /// Google Play 游戏登录
             /// </summary>
-            GOOGLE_PLAY_GAMES,
+            GOOGLE_PLAY_GAMES = 6,
 
             /// <summary>
             /// 自校验登录
             /// </summary>
-            BY_CLIENT_SELF,
+            BY_CLIENT_SELF = 7,
 
             /// <summary>
             /// Apple 账户
             /// </summary>
-            APPLE,
+            APPLE = 2,
         }
 
         /// <summary>
@@ -643,6 +643,12 @@ namespace Athana.Api
             /// 开发者key
             /// </summary>
             public string sdkKey;
+
+            /// <summary>
+            /// App ID（iOS）
+            /// </summary>
+            public string? appId;
+
             /// <summary>
             /// 是否手动启动
             /// </summary>
@@ -720,6 +726,311 @@ namespace Athana.Api
             public string? msg;
 
         }
+
+        #region Gaming Service Types
+
+        /// <summary>
+        /// 排行榜玩家范围
+        /// </summary>
+        public enum LeaderboardPlayerScope
+        {
+            /// <summary>
+            /// 公开（所有玩家）
+            /// </summary>
+            ALL = 0,
+
+            /// <summary>
+            /// 社交（仅好友）
+            /// </summary>
+            FRIENDS = 1
+        }
+
+        /// <summary>
+        /// 排行榜时间范围
+        /// </summary>
+        public enum LeaderboardTimeSpan
+        {
+            /// <summary>
+            /// 所有时间
+            /// </summary>
+            ALL_TIME = 0,
+
+            /// <summary>
+            /// 每周
+            /// </summary>
+            WEEK = 1,
+
+            /// <summary>
+            /// 每日
+            /// </summary>
+            TODAY = 2
+        }
+
+        /// <summary>
+        /// 分页方向
+        /// </summary>
+        public enum PageDirection
+        {
+            /// <summary>
+            /// 下一页
+            /// </summary>
+            NEXT = 0,
+
+            /// <summary>
+            /// 未定义
+            /// </summary>
+            NONE = 1,
+
+            /// <summary>
+            /// 上一页
+            /// </summary>
+            PREV = 2
+        }
+
+        /// <summary>
+        /// 成就类型
+        /// </summary>
+        public enum AchievementType
+        {
+            /// <summary>
+            /// 普通成就（一次性解锁）
+            /// </summary>
+            NORMAL,
+
+            /// <summary>
+            /// 增量成就（需要逐步完成）
+            /// </summary>
+            INCREMENTAL
+        }
+
+        /// <summary>
+        /// 成就状态
+        /// </summary>
+        public enum AchievementState
+        {
+            /// <summary>
+            /// 隐藏（未显示给玩家）
+            /// </summary>
+            HIDDEN,
+
+            /// <summary>
+            /// 可见（已显示但未解锁）
+            /// </summary>
+            VISIBLE,
+
+            /// <summary>
+            /// 已解锁
+            /// </summary>
+            UNLOCKED
+        }
+
+        /// <summary>
+        /// 玩家资料
+        /// </summary>
+        [Serializable]
+        public class PlayerProfile
+        {
+            /// <summary>
+            /// 玩家 ID（空字符串表示不允许访问）
+            /// </summary>
+            public string playerId;
+
+            /// <summary>
+            /// 玩家昵称
+            /// </summary>
+            public string playerName;
+
+            /// <summary>
+            /// 玩家头像 URL
+            /// </summary>
+            public string? avatarUrl;
+        }
+
+        /// <summary>
+        /// 分数额外信息
+        /// </summary>
+        [Serializable]
+        public class ScoreExtraInfo
+        {
+            /// <summary>
+            /// 分数产生时间（毫秒时间戳）
+            /// </summary>
+            public long timestamp;
+
+            /// <summary>
+            /// 格式化的排名显示
+            /// </summary>
+            public string? formatterRank;
+
+            /// <summary>
+            /// 分数标记
+            /// </summary>
+            public string? tag;
+        }
+
+        /// <summary>
+        /// 分数数据
+        /// </summary>
+        [Serializable]
+        public class ScoreData
+        {
+            /// <summary>
+            /// 名次
+            /// </summary>
+            public long rank;
+
+            /// <summary>
+            /// 原始分数值
+            /// </summary>
+            public long score;
+
+            /// <summary>
+            /// 格式化的分数显示
+            /// </summary>
+            public string displayScore;
+
+            /// <summary>
+            /// 玩家信息
+            /// </summary>
+            public PlayerProfile player;
+
+            /// <summary>
+            /// 额外信息
+            /// </summary>
+            public ScoreExtraInfo extraInfo;
+        }
+
+        /// <summary>
+        /// 排行榜数据
+        /// </summary>
+        [Serializable]
+        public class ScoreList
+        {
+            /// <summary>
+            /// 分数列表
+            /// </summary>
+            public List<ScoreData> scoreList;
+
+            /// <summary>
+            /// 是否还有下一页
+            /// </summary>
+            public bool hasMore;
+        }
+
+        /// <summary>
+        /// 排行榜信息
+        /// </summary>
+        [Serializable]
+        public class LeaderboardInfo
+        {
+            /// <summary>
+            /// 排行榜 ID
+            /// </summary>
+            public string leaderboardId;
+
+            /// <summary>
+            /// 排行榜名称
+            /// </summary>
+            public string name;
+
+            /// <summary>
+            /// 排行榜图片 URL
+            /// </summary>
+            public string? imageUrl;
+        }
+
+        /// <summary>
+        /// 成就额外信息（仅增量成就有效）
+        /// </summary>
+        [Serializable]
+        public class AchievementExtraInfo
+        {
+            /// <summary>
+            /// 增量成就达成的目标值
+            /// </summary>
+            public int? maxValue;
+
+            /// <summary>
+            /// 增量成就当前完成的值
+            /// </summary>
+            public int? currentValue;
+
+            /// <summary>
+            /// 目标值的格式化文案
+            /// </summary>
+            public string? formattedMaxValue;
+
+            /// <summary>
+            /// 当前值的格式化文案
+            /// </summary>
+            public string? formattedCurrentValue;
+        }
+
+        /// <summary>
+        /// 成就信息
+        /// </summary>
+        [Serializable]
+        public class Achievement
+        {
+            /// <summary>
+            /// 成就 ID
+            /// </summary>
+            public string achievementId;
+
+            /// <summary>
+            /// 成就标题
+            /// </summary>
+            public string title;
+
+            /// <summary>
+            /// 成就描述
+            /// </summary>
+            public string description;
+
+            /// <summary>
+            /// 成就图片 URL
+            /// </summary>
+            public string? imageUrl;
+
+            /// <summary>
+            /// 成就类型
+            /// </summary>
+            public AchievementType type;
+
+            /// <summary>
+            /// 成就状态
+            /// </summary>
+            public AchievementState state;
+
+            /// <summary>
+            /// 成就进度（0.0 - 1.0）
+            /// </summary>
+            public double progress;
+
+            /// <summary>
+            /// 成就额外信息（仅增量成就有效）
+            /// </summary>
+            public AchievementExtraInfo? extraInfo;
+        }
+
+        /// <summary>
+        /// 好友列表
+        /// </summary>
+        [Serializable]
+        public class FriendList
+        {
+            /// <summary>
+            /// 玩家列表
+            /// </summary>
+            public List<PlayerProfile> friends;
+
+            /// <summary>
+            /// 是否有更多数据（false 表示已加载完所有数据）
+            /// </summary>
+            public bool hasMore;
+        }
+
+        #endregion
 
         protected static void HandleSdkCallbackResult(string content)
         {
