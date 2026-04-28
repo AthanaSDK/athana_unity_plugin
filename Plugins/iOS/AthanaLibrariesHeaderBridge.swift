@@ -341,10 +341,10 @@ private let TAG = "ATHANA-Unity"
         Task {
             let functionName = "onUpdateUserInfoResult"
             do {
-                let result = try await Athana.shared.updateUserInfo(customUserId: customUserId)
+                try await Athana.shared.updateUserInfo(customUserId: customUserId)
                 let sdkResult = AthanaSdkResult(
                     functionName: functionName,
-                    data: "\(result)",
+                    data: "true",
                     message: nil,
                     error: nil
                 )
